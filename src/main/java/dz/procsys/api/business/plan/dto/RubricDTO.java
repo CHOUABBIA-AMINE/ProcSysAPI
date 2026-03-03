@@ -1,0 +1,101 @@
+/**
+ *	
+ *	@author		: CHOUABBIA Amine
+ *
+ *	@Name		: RubricDTO
+ *	@CreatedOn	: 10-16-2025
+ *	@Updated	: 12-11-2025
+ *
+ *	@Type		: Class
+ *	@Layer		: DTO
+ *	@Package	: Business / Plan
+ *
+ **/
+
+package dz.procsys.api.business.plan.dto;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+import dz.procsys.api.business.plan.model.Domain;
+import dz.procsys.api.business.plan.model.Rubric;
+import dz.procsys.api.configuration.template.GenericDTO;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
+
+/**
+ * Rubric Data Transfer Object
+ * Extends GenericDTO for automatic entity conversion
+ */
+@Data
+@EqualsAndHashCode(callSuper = true)
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class RubricDTO extends GenericDTO<Rubric> {
+
+    @Size(max = 200, message = "Arabic designation must not exceed 200 characters")
+    private String designationAr;
+
+    @Size(max = 200, message = "English designation must not exceed 200 characters")
+    private String designationEn;
+
+    @NotBlank(message = "French designation is required")
+    @Size(max = 200, message = "French designation must not exceed 200 characters")
+    private String designationFr;
+    
+    @NotNull(message = "Domain is required")
+    private Long domainId;
+    
+    private DomainDTO domain;
+
+
+    @Override
+    public Rubric toEntity() {
+        Rubric entity = new Rubric();
+        entity.setId(this.getId());
+        entity.setDesignationAr(this.designationAr);
+        entity.setDesignationEn(this.designationEn);
+        entity.setDesignationFr(this.designationFr);
+        
+		if (this.domainId != null) {
+			Domain domain = new Domain();
+			domain.setId(this.domainId);
+		    entity.setDomain(domain);
+		}
+
+        return entity;
+    }
+
+    @Override
+    public void updateEntity(Rubric entity) {
+        if (this.designationAr != null) entity.setDesignationAr(this.designationAr);
+        if (this.designationEn != null) entity.setDesignationEn(this.designationEn);
+        if (this.designationFr != null) entity.setDesignationFr(this.designationFr);
+        
+		if (this.domainId != null) {
+			Domain domain = new Domain();
+			domain.setId(this.domainId);
+		    entity.setDomain(domain);
+		}
+    }
+
+    public static RubricDTO fromEntity(Rubric entity) {
+        if (entity == null) return null;
+        return RubricDTO.builder()
+                .id(entity.getId())
+                .designationAr(entity.getDesignationAr())
+                .designationEn(entity.getDesignationEn())
+                .designationFr(entity.getDesignationFr())
+                .domainId(entity.getDomain() != null ? entity.getDomain().getId() : null)
+                
+                .domain(entity.getDomain() != null ? DomainDTO.fromEntity(entity.getDomain()) : null)
+                .build();
+    }
+}
