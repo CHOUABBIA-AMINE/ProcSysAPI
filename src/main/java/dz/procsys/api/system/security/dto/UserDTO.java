@@ -20,9 +20,9 @@ import java.util.stream.Collectors;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import dz.procsys.api.common.administration.dto.EmployeeDTO;
+import dz.procsys.api.common.administration.model.Employee;
 import dz.procsys.api.configuration.template.GenericDTO;
-import dz.procsys.api.general.organization.dto.EmployeeDTO;
-import dz.procsys.api.general.organization.model.Employee;
 import dz.procsys.api.system.security.model.Group;
 import dz.procsys.api.system.security.model.Role;
 import dz.procsys.api.system.security.model.User;

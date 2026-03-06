@@ -2,7 +2,7 @@
  *	
  *	@Author		: MEDJERAB Abir
  *
- *	@Name		: Locality
+ *	@Name		: District
  *	@CreatedOn	: 06-26-2025
  *	@UpdatedOn	: 01-02-2026
  *
@@ -35,34 +35,34 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * Represents Algerian communes (baladiyahs) - municipalities at the local level.
- * Third-level administrative division below daïras.
+ * Represents Algerian districts (daïras) - administrative subdivisions within provinces.
+ * Second-level administrative division below wilayas.
  */
-@Schema(description = "Algerian commune (baladiyah) representing third-level administrative subdivision - municipalities")
+@Schema(description = "Algerian district (daïra) representing second-level administrative subdivision within a wilaya")
 @Setter
 @Getter
 @ToString
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name="Locality")
-@Table(name="T_01_02_05", uniqueConstraints = {@UniqueConstraint(name = "T_01_02_05_UK_01", columnNames = { "F_01" })})
-public class Locality extends GenericModel {
+@Entity(name="District")
+@Table(name="T_01_02_04", uniqueConstraints = {@UniqueConstraint(name = "T_01_02_04_UK_01", columnNames = { "F_01" })})
+public class District extends GenericModel {
 	
 	@Schema(
-		description = "Unique code identifying the commune",
-		example = "160101",
+		description = "Unique code identifying the district",
+		example = "1601",
 		requiredMode = Schema.RequiredMode.REQUIRED,
 		maxLength = 10
 	)
-	@NotBlank(message = "Locality code is mandatory")
-	@Size(max = 10, message = "Locality code must not exceed 10 characters")
+	@NotBlank(message = "District code is mandatory")
+	@Size(max = 10, message = "District code must not exceed 10 characters")
 	@Column(name="F_01", length=10, nullable=false)
 	private String code;
 	
 	@Schema(
-		description = "Commune name in Arabic",
-		example = "باب الوادي",
+		description = "District name in Arabic",
+		example = "سيدي امحمد",
 		requiredMode = Schema.RequiredMode.NOT_REQUIRED,
 		maxLength = 100
 	)
@@ -71,8 +71,8 @@ public class Locality extends GenericModel {
 	private String designationAr;
 
 	@Schema(
-		description = "Commune name in English",
-		example = "Bab El Oued",
+		description = "District name in English",
+		example = "Sidi M'Hamed",
 		requiredMode = Schema.RequiredMode.NOT_REQUIRED,
 		maxLength = 100
 	)
@@ -81,8 +81,8 @@ public class Locality extends GenericModel {
 	private String designationEn;
 	
 	@Schema(
-		description = "Commune name in French (required)",
-		example = "Bab El Oued",
+		description = "District name in French (required)",
+		example = "Sidi M'Hamed",
 		requiredMode = Schema.RequiredMode.REQUIRED,
 		maxLength = 100
 	)
@@ -92,11 +92,11 @@ public class Locality extends GenericModel {
 	private String designationFr;
 	
 	@Schema(
-		description = "Parent district (daïra) to which this commune belongs",
+		description = "Parent wilaya (province) to which this district belongs",
 		requiredMode = Schema.RequiredMode.REQUIRED
 	)
-	@NotNull(message = "District is mandatory")
+	@NotNull(message = "State is mandatory")
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="F_05", referencedColumnName = "F_00", foreignKey=@ForeignKey(name="T_01_02_05_FK_01"), nullable=false)
-	private District district;
+	@JoinColumn(name="F_05", referencedColumnName = "F_00", foreignKey=@ForeignKey(name="T_01_02_04_FK_01"), nullable=false)
+	private State state;
 }

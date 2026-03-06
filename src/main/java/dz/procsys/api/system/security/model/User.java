@@ -24,8 +24,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import dz.procsys.api.common.administration.model.Employee;
 import dz.procsys.api.configuration.template.GenericModel;
-import dz.procsys.api.general.organization.model.Employee;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

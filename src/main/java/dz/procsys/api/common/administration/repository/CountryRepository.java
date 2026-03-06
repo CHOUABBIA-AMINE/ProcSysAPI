@@ -1,22 +1,27 @@
 /**
  *	
- *	@author		: CHOUABBIA Amine
+ *	@Author		: MEDJERAB Abir
  *
  *	@Name		: CountryRepository
  *	@CreatedOn	: 06-26-2025
- *	@Updated	: 12-11-2025
+ *	@UpdatedOn	: 01-02-2026
  *
- *	@Type		: Repository
- *	@Layer		: Common / Administration
- *	@Package	: Common / Administration / Repository
+ *	@Type		: Interface
+ *	@Layer		: Repository
+ *	@Package	: General / Localization
  *
  **/
 
-package dz.procsys.api.common.administration.repository;
+package dz.sh.trc.hyflo.general.localization.repository;
 
-import dz.procsys.api.common.administration.model.Country;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import dz.sh.trc.hyflo.general.localization.model.Country;
 
 /**
  * Country Repository
@@ -25,8 +30,14 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface CountryRepository extends JpaRepository<Country, Long> {
-    // All basic CRUD operations (findById, findAll, save, delete, existsById, count) 
-    // are inherited from JpaRepository
+
+    // ========== CUSTOM QUERIES (Complex multi-field search) ==========
     
-    // Add custom query methods here only if needed by service
+    @Query("SELECT l FROM Country l WHERE "
+            + "LOWER(l.code) LIKE LOWER(CONCAT('%', :search, '%')) OR "
+            + "LOWER(l.designationAr) LIKE LOWER(CONCAT('%', :search, '%')) OR "
+            + "LOWER(l.designationEn) LIKE LOWER(CONCAT('%', :search, '%')) OR "
+            + "LOWER(l.designationFr) LIKE LOWER(CONCAT('%', :search, '%'))")
+    Page<Country> searchByAnyField(@Param("search") String search, Pageable pageable);
+    
 }

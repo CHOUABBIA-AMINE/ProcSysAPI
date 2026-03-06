@@ -1,38 +1,35 @@
 /**
  *	
- *	@author		: CHOUABBIA Amine
+ *	@Author		: MEDJERAB Abir
  *
  *	@Name		: LocalityService
- *	@CreatedOn	: 10-14-2025
- *	@Updated	: 12-11-2025
+ *	@CreatedOn	: 06-26-2025
+ *	@UpdatedOn	: 01-02-2026
  *
- *	@Type		: Service
- *	@Layer		: Common / Administration
- *	@Package	: Common / Administration / Service
+ *	@Type		: Class
+ *	@Layer		: Service
+ *	@Package	: General / Localization
  *
  **/
 
-package dz.procsys.api.common.administration.service;
+package dz.sh.trc.hyflo.general.localization.service;
 
-import dz.procsys.api.common.administration.dto.LocalityDTO;
-import dz.procsys.api.common.administration.model.Locality;
-import dz.procsys.api.common.administration.model.State;
-import dz.procsys.api.common.administration.repository.LocalityRepository;
-import dz.procsys.api.configuration.template.GenericService;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import dz.sh.trc.hyflo.configuration.template.GenericService;
+import dz.sh.trc.hyflo.general.localization.dto.LocalityDTO;
+import dz.sh.trc.hyflo.general.localization.model.Locality;
+import dz.sh.trc.hyflo.general.localization.repository.LocalityRepository;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
-/**
- * Locality Service - Extends GenericService
- */
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -40,7 +37,6 @@ import java.util.stream.Collectors;
 public class LocalityService extends GenericService<Locality, LocalityDTO, Long> {
 
     private final LocalityRepository localityRepository;
-    private final StateService stateService;
 
     @Override
     protected JpaRepository<Locality, Long> getRepository() {
@@ -61,31 +57,19 @@ public class LocalityService extends GenericService<Locality, LocalityDTO, Long>
     protected Locality toEntity(LocalityDTO dto) {
         Locality entity = dto.toEntity();
         
-        // Set relationships
-        if (dto.getStateId() != null) {
-            State state = stateService.getEntityById(dto.getStateId());
-            entity.setState(state);
-        }
-        
         return entity;
     }
 
     @Override
     protected void updateEntityFromDTO(Locality entity, LocalityDTO dto) {
         dto.updateEntity(entity);
-        
-        // Update relationships
-        if (dto.getStateId() != null) {
-            State state = stateService.getEntityById(dto.getStateId());
-            entity.setState(state);
-        }
     }
 
     @Override
     @Transactional
     public LocalityDTO create(LocalityDTO dto) {
-        log.info("Creating locality: code={}, designationFr={}, stateId={}", 
-                dto.getCode(), dto.getDesignationFr(), dto.getStateId());
+        log.info("Creating locality: code={}, designationFr={}, districtId={}", 
+                dto.getCode(), dto.getDesignationFr(), dto.getDistrictId());
         return super.create(dto);
     }
 
@@ -110,12 +94,12 @@ public class LocalityService extends GenericService<Locality, LocalityDTO, Long>
             return getAll(pageable);
         }
         
-        return getAll(pageable);
+        return executeQuery(p -> localityRepository.searchByAnyField(searchTerm.trim(), p), pageable);
     }
 
-    public List<LocalityDTO> getByStateId(Long stateId) {
-        log.debug("Getting localities by state ID: {}", stateId);
-        return localityRepository.findByStateId(stateId).stream()
+    public List<LocalityDTO> getByDistrictId(Long districtId) {
+        log.debug("Getting localities by district ID: {}", districtId);
+        return localityRepository.findByDistrictId(districtId).stream()
                 .map(LocalityDTO::fromEntity)
                 .collect(Collectors.toList());
     }

@@ -1,18 +1,18 @@
 /**
  *	
- *	@author		: CHOUABBIA Amine
+ *	@Author		: MEDJERAB Abir
  *
  *	@Name		: StateService
- *	@CreatedOn	: 10-14-2025
- *	@Updated	: 12-11-2025
+ *	@CreatedOn	: 06-26-2025
+ *	@UpdatedOn	: 01-02-2026
  *
- *	@Type		: Service
- *	@Layer		: Common / Administration
- *	@Package	: Common / Administration / Service
+ *	@Type		: Class
+ *	@Layer		: Service
+ *	@Package	: General / Localization
  *
  **/
 
-package dz.procsys.api.common.administration.service;
+package dz.sh.trc.hyflo.general.localization.service;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,16 +23,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import dz.procsys.api.common.administration.dto.StateDTO;
-import dz.procsys.api.common.administration.model.State;
-import dz.procsys.api.common.administration.repository.StateRepository;
-import dz.procsys.api.configuration.template.GenericService;
+import dz.sh.trc.hyflo.configuration.template.GenericService;
+import dz.sh.trc.hyflo.general.localization.dto.StateDTO;
+import dz.sh.trc.hyflo.general.localization.model.State;
+import dz.sh.trc.hyflo.general.localization.repository.StateRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-/**
- * State Service - Extends GenericService
- */
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -97,6 +94,6 @@ public class StateService extends GenericService<State, StateDTO, Long> {
             return getAll(pageable);
         }
         
-        return getAll(pageable);
+        return executeQuery(p -> stateRepository.searchByAnyField(searchTerm.trim(), p), pageable);
     }
 }

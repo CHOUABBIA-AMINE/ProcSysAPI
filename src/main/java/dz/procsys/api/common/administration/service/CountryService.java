@@ -1,23 +1,23 @@
 /**
  *	
- *	@author		: CHOUABBIA Amine
+ *	@Author		: MEDJERAB Abir
  *
  *	@Name		: CountryService
- *	@CreatedOn	: 10-14-2025
- *	@Updated	: 12-11-2025
+ *	@CreatedOn	: 06-26-2025
+ *	@UpdatedOn	: 01-02-2026
  *
- *	@Type		: Service
- *	@Layer		: Common / Administration
- *	@Package	: Common / Administration / Service
+ *	@Type		: Class
+ *	@Layer		: Service
+ *	@Package	: General / Localization
  *
  **/
 
-package dz.procsys.api.common.administration.service;
+package dz.sh.trc.hyflo.general.localization.service;
 
-import dz.procsys.api.common.administration.dto.CountryDTO;
-import dz.procsys.api.common.administration.model.Country;
-import dz.procsys.api.common.administration.repository.CountryRepository;
-import dz.procsys.api.configuration.template.GenericService;
+import dz.sh.trc.hyflo.configuration.template.GenericService;
+import dz.sh.trc.hyflo.general.localization.dto.CountryDTO;
+import dz.sh.trc.hyflo.general.localization.model.Country;
+import dz.sh.trc.hyflo.general.localization.repository.CountryRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -29,9 +29,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Country Service - Extends GenericService
- */
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -93,6 +90,6 @@ public class CountryService extends GenericService<Country, CountryDTO, Long> {
             return getAll(pageable);
         }
         
-        return getAll(pageable);
+        return executeQuery(p -> countryRepository.searchByAnyField(searchTerm.trim(), p), pageable);
     }
 }

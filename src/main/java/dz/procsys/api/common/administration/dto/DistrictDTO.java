@@ -2,7 +2,7 @@
  *	
  *	@Author		: MEDJERAB Abir
  *
- *	@Name		: LocalityDTO
+ *	@Name		: DistrictDTO
  *	@CreatedOn	: 06-26-2025
  *	@UpdatedOn	: 02-15-2026 - Added comprehensive @Schema documentation
  *
@@ -17,7 +17,7 @@ package dz.procsys.api.common.administration.dto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import dz.procsys.api.common.administration.model.District;
-import dz.procsys.api.common.administration.model.Locality;
+import dz.procsys.api.common.administration.model.State;
 import dz.procsys.api.configuration.template.GenericDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
@@ -29,18 +29,18 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-@Schema(description = "Data Transfer Object for locality/commune (third-level administrative division in Algeria) with district hierarchy")
+@Schema(description = "Data Transfer Object for district/daïra (second-level administrative division in Algeria) with state hierarchy")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class LocalityDTO extends GenericDTO<Locality> {
+public class DistrictDTO extends GenericDTO<District> {
 
     @Schema(
-        description = "Locality/Commune code or identifier (required)",
-        example = "160101",
+        description = "District/Daïra code or identifier (required)",
+        example = "1601",
         requiredMode = Schema.RequiredMode.REQUIRED,
         maxLength = 10
     )
@@ -49,8 +49,8 @@ public class LocalityDTO extends GenericDTO<Locality> {
     private String code;
 
     @Schema(
-        description = "Locality/Commune name in Arabic script",
-        example = "بلدية باب الواد",
+        description = "District/Daïra name in Arabic script",
+        example = "دائرة باب الواد",
         requiredMode = Schema.RequiredMode.NOT_REQUIRED,
         maxLength = 100
     )
@@ -58,8 +58,8 @@ public class LocalityDTO extends GenericDTO<Locality> {
     private String designationAr;
 
     @Schema(
-        description = "Locality/Commune name in English",
-        example = "Bab El Oued",
+        description = "District/Daïra name in English",
+        example = "Bab El Oued District",
         requiredMode = Schema.RequiredMode.NOT_REQUIRED,
         maxLength = 100
     )
@@ -67,8 +67,8 @@ public class LocalityDTO extends GenericDTO<Locality> {
     private String designationEn;
 
     @Schema(
-        description = "Locality/Commune name in French (required for SONATRACH operations)",
-        example = "Bab El Oued",
+        description = "District/Daïra name in French (required for SONATRACH operations)",
+        example = "Daïra de Bab El Oued",
         requiredMode = Schema.RequiredMode.REQUIRED,
         maxLength = 100
     )
@@ -77,61 +77,61 @@ public class LocalityDTO extends GenericDTO<Locality> {
     private String designationFr;
 
     @Schema(
-        description = "ID of the district/daïra this locality belongs to (required)",
+        description = "ID of the state/wilaya this district belongs to (required)",
         example = "1",
         requiredMode = Schema.RequiredMode.REQUIRED
     )
-    @NotNull(message = "District ID is required")
-    private Long districtId;
+    @NotNull(message = "State ID is required")
+    private Long stateId;
 
     @Schema(
-        description = "District/Daïra details (populated when fetching with district information)",
+        description = "State/Wilaya details (populated when fetching with state information)",
         requiredMode = Schema.RequiredMode.NOT_REQUIRED
     )
-    private DistrictDTO district;
+    private StateDTO state;
 
     @Override
-    public Locality toEntity() {
-        Locality entity = new Locality();
+    public District toEntity() {
+        District entity = new District();
         entity.setId(this.getId());
         entity.setCode(this.code);
         entity.setDesignationAr(this.designationAr);
         entity.setDesignationEn(this.designationEn);
         entity.setDesignationFr(this.designationFr);
 
-        if (this.districtId != null) {
-            District district = new District();
-            district.setId(this.districtId);
-            entity.setDistrict(district);
+        if (this.stateId != null) {
+            State state = new State();
+            state.setId(this.stateId);
+            entity.setState(state);
         }
 
         return entity;
     }
 
     @Override
-    public void updateEntity(Locality entity) {
+    public void updateEntity(District entity) {
         if (this.code != null) entity.setCode(this.code);
         if (this.designationAr != null) entity.setDesignationAr(this.designationAr);
         if (this.designationEn != null) entity.setDesignationEn(this.designationEn);
         if (this.designationFr != null) entity.setDesignationFr(this.designationFr);
 
-        if (this.districtId != null) {
-            District district = new District();
-            district.setId(this.districtId);
-            entity.setDistrict(district);
+        if (this.stateId != null) {
+            State state = new State();
+            state.setId(this.stateId);
+            entity.setState(state);
         }
     }
 
-    public static LocalityDTO fromEntity(Locality entity) {
+    public static DistrictDTO fromEntity(District entity) {
         if (entity == null) return null;
-        return LocalityDTO.builder()
+        return DistrictDTO.builder()
                 .id(entity.getId())
                 .code(entity.getCode())
                 .designationAr(entity.getDesignationAr())
                 .designationEn(entity.getDesignationEn())
                 .designationFr(entity.getDesignationFr())
-                .districtId(entity.getDistrict() != null ? entity.getDistrict().getId() : null)
-                .district(entity.getDistrict() != null ? DistrictDTO.fromEntity(entity.getDistrict()) : null)
+                .stateId(entity.getState() != null ? entity.getState().getId() : null)
+                .state(entity.getState() != null ? StateDTO.fromEntity(entity.getState()) : null)
                 .build();
     }
 }

@@ -17,7 +17,7 @@ package dz.procsys.api.system.auth.dto;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import dz.procsys.api.general.organization.dto.EmployeeDTO;
+import dz.procsys.api.common.administration.dto.EmployeeDTO;
 import dz.procsys.api.system.security.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
