@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>4.0.3</version>
+		<version>4.0.6</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>dz.procsys</groupId>
@@ -13,19 +13,30 @@
 	<version>0.0.1</version>
 	<name>ProcSysAPI</name>
 	<description>Procurement System API</description>
-	<url/>
+	<url>https://github.com/CHOUABBIA-AMINE/ProcSysAPI</url>
+	
 	<licenses>
-		<license/>
+	    <license>
+	        <name>Apache License 2.0</name>
+	        <url>https://www.apache.org/licenses/LICENSE-2.0</url>
+	    </license>
 	</licenses>
+
 	<developers>
-		<developer/>
+	    <developer>
+	        <id>Amine</id>
+	        <name>Amine CHOUABBIA</name>
+	        <organization>MDN</organization>
+	    </developer>
 	</developers>
+
 	<scm>
-		<connection/>
-		<developerConnection/>
-		<tag/>
-		<url/>
+	    <connection>scm:git:git://github.com/CHOUABBIA-AMINE/ProcSysAPI.git</connection>
+	    <developerConnection>scm:git:ssh://git@github.com/CHOUABBIA-AMINE/ProcSysAPI.git</developerConnection>
+	    <url>https://github.com/CHOUABBIA-AMINE/ProcSysAPI</url>
+	    <tag>HEAD</tag>
 	</scm>
+	
 	<properties>
 		<java.version>17</java.version>
 		<maven.compiler.source>17</maven.compiler.source>
@@ -76,6 +87,18 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct</artifactId>
+			<version>1.6.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct-processor</artifactId>
+			<version>1.6.3</version>
+			<scope>provided</scope>
 		</dependency>
 		
 		<!-- JWT Dependencies - Version 0.13.0 -->

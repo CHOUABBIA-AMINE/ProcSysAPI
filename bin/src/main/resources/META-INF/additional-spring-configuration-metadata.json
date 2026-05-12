@@ -1,0 +1,122 @@
+{"properties": [
+  {
+    "name": "app.file.upload-dir",
+    "type": "java.lang.String",
+    "description": "A description for 'app.file.upload-dir'"
+  },
+  {
+    "name": "spring.security.require-ssl",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.security.require-ssl'"
+  },
+  {
+    "name": "spring.security.headers.frame-options",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.security.headers.frame-options'"
+  },
+  {
+    "name": "spring.security.headers.content-security-policy",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.security.headers.content-security-policy'"
+  },
+  {
+    "name": "cors.allowed.origins",
+    "type": "java.lang.String",
+    "description": "A description for 'cors.allowed.origins'"
+  },
+  {
+    "name": "cors.allowed.methods",
+    "type": "java.lang.String",
+    "description": "A description for 'cors.allowed.methods'"
+  },
+  {
+    "name": "cors.allowed.headers",
+    "type": "java.lang.String",
+    "description": "A description for 'cors.allowed.headers'"
+  },
+  {
+    "name": "cors.allow.credentials",
+    "type": "java.lang.String",
+    "description": "A description for 'cors.allow.credentials'"
+  },
+  {
+    "name": "jwt.secret",
+    "type": "java.lang.String",
+    "description": "A description for 'jwt.secret'"
+  },
+  {
+    "name": "jwt.access.expiration",
+    "type": "java.lang.String",
+    "description": "A description for 'jwt.access.expiration'"
+  },
+  {
+    "name": "jwt.refresh.expiration",
+    "type": "java.lang.String",
+    "description": "A description for 'jwt.refresh.expiration'"
+  },
+  {
+    "name": "file.upload-dir",
+    "type": "java.lang.String",
+    "description": "A description for 'file.upload-dir'"
+  },
+  {
+    "name": "file.max-size",
+    "type": "java.lang.String",
+    "description": "A description for 'file.max-size'"
+  },
+  {
+    "name": "file.allowed-extensions",
+    "type": "java.lang.String",
+    "description": "A description for 'file.allowed-extensions'"
+  },
+  {
+    "name": "hyflo.openapi.dev-url",
+    "type": "java.lang.String",
+    "description": "A description for 'hyflo.openapi.dev-url'"
+  },
+  {
+    "name": "hyflo.openapi.prod-url",
+    "type": "java.lang.String",
+    "description": "A description for 'hyflo.openapi.prod-url'"
+  },
+  {
+    "name": "notification.websocket.enabled",
+    "type": "java.lang.String",
+    "description": "A description for 'notification.websocket.enabled'"
+  },
+  {
+    "name": "notification.websocket.allowed-origins",
+    "type": "java.lang.String",
+    "description": "A description for 'notification.websocket.allowed-origins'"
+  },
+  {
+    "name": "notification.cleanup.enabled",
+    "type": "java.lang.String",
+    "description": "A description for 'notification.cleanup.enabled'"
+  },
+  {
+    "name": "notification.cleanup.cron",
+    "type": "java.lang.String",
+    "description": "A description for 'notification.cleanup.cron'"
+  },
+  {
+    "name": "notification.cleanup.retention-days",
+    "type": "java.lang.String",
+    "description": "A description for 'notification.cleanup.retention-days'"
+  },
+  {
+    "name": "spring.security.require-ssl",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.security.require-ssl'"
+  },
+  {
+    "name": "cors.allow.credentials",
+    "type": "java.lang.String",
+    "description": "A description for 'cors.allow.credentials'"
+  },
+  {
+    "name": "spring.security.require-ssl",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.security.require-ssl'"
+  }
+]}
