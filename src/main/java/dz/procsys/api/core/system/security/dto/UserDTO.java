@@ -20,12 +20,12 @@ import java.util.stream.Collectors;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import dz.procsys.api.platform.kernel.GenericDTO;
-import dz.procsys.api.core.general.organization.dto.EmployeeDTO;
-import dz.procsys.api.core.general.organization.model.Employee;
+import dz.procsys.api.core.common.administration.dto.EmployeeDTO;
+import dz.procsys.api.core.common.administration.model.Employee;
 import dz.procsys.api.core.system.security.model.Group;
 import dz.procsys.api.core.system.security.model.Role;
 import dz.procsys.api.core.system.security.model.User;
+import dz.procsys.api.platform.kernel.GenericDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

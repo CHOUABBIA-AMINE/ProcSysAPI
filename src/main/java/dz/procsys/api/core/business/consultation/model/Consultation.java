@@ -17,15 +17,15 @@ package dz.procsys.api.core.business.consultation.model;
 import java.util.Date;
 import java.util.List;
 
-import dz.procsys.api.platform.kernel.GenericModel;
 import dz.procsys.api.core.business.core.model.ApprovalStatus;
 import dz.procsys.api.core.business.core.model.ProcurementDirector;
 import dz.procsys.api.core.business.core.model.ProcurementNature;
 import dz.procsys.api.core.business.core.model.ProcurementStatus;
 import dz.procsys.api.core.business.plan.model.BudgetType;
 import dz.procsys.api.core.business.plan.model.PlannedItem;
-import dz.procsys.api.common.communication.model.Mail;
-import dz.procsys.api.common.document.model.Document;
+import dz.procsys.api.core.common.communication.model.Mail;
+import dz.procsys.api.core.common.document.model.Document;
+import dz.procsys.api.platform.kernel.GenericModel;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;

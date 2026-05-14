@@ -12,7 +12,7 @@
  *
  **/
 
-package dz.procsys.api.core.system.audit.repository;
+package dz.procsys.api.core.system.audit.controller;
 
 import java.util.Date;
 import java.util.List;

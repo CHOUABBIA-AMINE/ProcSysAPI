@@ -23,11 +23,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import dz.procsys.api.core.communication.notification.dto.NotificationDTO;
-import dz.procsys.api.core.communication.notification.model.Notification;
-import dz.procsys.api.core.communication.notification.service.NotificationService;
-import dz.procsys.api.core.communication.type.model.NotificationType;
-import dz.procsys.api.core.communication.type.repository.NotificationTypeRepository;
+import dz.procsys.api.core.common.communication.dto.NotificationDTO;
+import dz.procsys.api.core.common.communication.model.Notification;
+import dz.procsys.api.core.common.communication.model.NotificationType;
+import dz.procsys.api.core.common.communication.repository.NotificationTypeRepository;
+import dz.procsys.api.core.common.communication.service.NotificationService;
 import dz.procsys.api.core.system.security.model.User;
 import dz.procsys.api.core.system.security.repository.UserRepository;
 import dz.procsys.api.platform.notification.websocket.NotificationWebSocketService;

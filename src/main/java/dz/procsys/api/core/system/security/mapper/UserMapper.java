@@ -25,8 +25,8 @@
 
 package dz.procsys.api.core.system.security.mapper;
 
-import dz.procsys.api.core.general.organization.mapper.EmployeeMapper;
-import dz.procsys.api.core.general.organization.model.Employee;
+import dz.procsys.api.core.common.administration.mapper.EmployeeMapper;
+import dz.procsys.api.core.common.administration.model.Employee;
 import dz.procsys.api.core.system.security.dto.command.UserCommandDTO;
 import dz.procsys.api.core.system.security.dto.query.UserReadDTO;
 import dz.procsys.api.core.system.security.model.User;
@@ -53,8 +53,10 @@ public final class UserMapper {
                 .employeeFullName(employee != null ? EmployeeMapper.buildFullName(employee) : null)
                 // Role resolved through Employee.role (domain.security.model.Role).
                 // Role has 'name' field only — no getCode().
-                .roleCode(employee != null && employee.getRole() != null
-                        ? employee.getRole().getName() : null)
+				/*
+				 * .roleCode(employee != null && employee.getRole() != null ?
+				 * employee.getRole().getName() : null)
+				 */
                 // createdAt / lastLoginAt: NOT on User entity (GenericModel only has id).
                 // Fields left null; UserReadDTO is @JsonInclude(NON_NULL) so they are omitted.
                 .build();

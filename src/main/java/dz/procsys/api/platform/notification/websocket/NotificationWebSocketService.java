@@ -17,7 +17,7 @@ package dz.procsys.api.platform.notification.websocket;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
-import dz.procsys.api.core.communication.notification.dto.NotificationDTO;
+import dz.procsys.api.core.common.communication.dto.NotificationDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
