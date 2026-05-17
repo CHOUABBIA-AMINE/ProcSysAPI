@@ -1,6 +1,6 @@
 /**
  *	
- *	@Author		: Amine CHOUABBIA
+ *	@Author		: CHOUABBIA Amine
  *
  *	@Name		: AuditConfig
  *	@CreatedOn	: 06-26-2025

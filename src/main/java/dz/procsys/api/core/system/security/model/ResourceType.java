@@ -1,6 +1,6 @@
 /**
  *	
- *	@Author		: MEDJERAB Abir
+ *	@Author		: CHOUABBIA Amine
  *
  *	@Name		: ResourceType
  *	@CreatedOn	: 06-26-2025

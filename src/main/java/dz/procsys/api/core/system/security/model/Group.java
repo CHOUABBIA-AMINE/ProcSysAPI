@@ -1,6 +1,6 @@
 /**
  *	
- *	@Author		: MEDJERAB Abir
+ *	@Author		: CHOUABBIA Amine
  *
  *	@Name		: Group
  *	@CreatedOn	: 06-26-2025
@@ -39,10 +39,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-/**
- * User group entity for organizing users and assigning roles collectively.
- * Examples: Pipeline Engineers, Operations Managers, Safety Inspectors.
- */
 @Schema(description = "User group for collective role assignment and organization management")
 @Setter
 @Getter

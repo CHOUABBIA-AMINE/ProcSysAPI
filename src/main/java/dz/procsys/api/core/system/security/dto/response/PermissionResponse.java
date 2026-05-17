@@ -1,9 +1,0 @@
-package dz.procsys.api.core.system.security.dto.response;
-
-public record PermissionResponse(
-        Long id,
-        String name,
-        String description,
-        String resourceCode,
-        String actionName
-) {}

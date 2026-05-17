@@ -1,6 +1,6 @@
 /**
  *  
- *  @Author     : Amine CHOUABBIA
+ *  @Author     : CHOUABBIA Amine
  *
  *  @Name       : WebSocketConfig
  *  @CreatedOn  : 02-01-2026

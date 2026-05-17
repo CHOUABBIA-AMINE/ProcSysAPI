@@ -1,6 +1,6 @@
 /**
  *	
- *	@Author		: Amine CHOUABBIA
+ *	@Author		: CHOUABBIA Amine
  *
  *	@Name		: File
  *	@CreatedOn	: 06-26-2023

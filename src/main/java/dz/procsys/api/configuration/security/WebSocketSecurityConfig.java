@@ -1,6 +1,6 @@
 /**
  *  
- *  @Author     : Amine CHOUABBIA
+ *  @Author     : CHOUABBIA Amine
  *
  *  @Name       : WebSocketSecurityConfig
  *  @CreatedOn  : 02-01-2026

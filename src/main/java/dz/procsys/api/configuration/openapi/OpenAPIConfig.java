@@ -1,6 +1,6 @@
 /**
  *	
- *	@Author		: Amine CHOUABBIA
+ *	@Author		: CHOUABBIA Amine
  *
  *	@Name		: OpenAPIConfig
  *	@CreatedOn	: 01-10-2026
