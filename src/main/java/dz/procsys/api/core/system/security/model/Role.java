@@ -1,6 +1,6 @@
 /**
  *	
- *	@Author		: Amine CHOUABBIA
+ *	@Author		: MEDJERAB Abir
  *
  *	@Name		: Role
  *	@CreatedOn	: 06-26-2025
@@ -14,19 +14,34 @@
 
 package dz.procsys.api.core.system.security.model;
 
-import dz.procsys.api.platform.kernel.GenericModel;
-import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
-import lombok.*;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
+import dz.procsys.api.platform.kernel.GenericModel;
+import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ForeignKey;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * Role entity for Role-Based Access Control (RBAC).
@@ -35,8 +50,6 @@ import java.util.stream.Collectors;
 @Schema(description = "Security role aggregating permissions for RBAC authorization")
 @Setter
 @Getter
-@ToString
-@EqualsAndHashCode(callSuper = true)
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -75,10 +88,10 @@ public class Role extends GenericModel {
 	@ToString.Exclude
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(
-		name = "R_T000203_T000204",
-		joinColumns = @JoinColumn(name = "F_01", referencedColumnName = "F_00", foreignKey=@ForeignKey(name="R_T000203_T000204_FK_01")),
-		inverseJoinColumns = @JoinColumn(name = "F_02", referencedColumnName = "F_00", foreignKey=@ForeignKey(name="R_T000203_T000204_FK_02")),
-		uniqueConstraints = @UniqueConstraint(name = "R_T000203_T000204_UK_01", columnNames = {"F_01", "F_02"})
+		name = "R_T000203_T000207",
+		joinColumns = @JoinColumn(name = "F_01", referencedColumnName = "F_00", foreignKey=@ForeignKey(name="R_T000203_T000207_FK_01")),
+		inverseJoinColumns = @JoinColumn(name = "F_02", referencedColumnName = "F_00", foreignKey=@ForeignKey(name="R_T000203_T000207_FK_02")),
+		uniqueConstraints = @UniqueConstraint(name = "R_T000203_T000207_UK_01", columnNames = {"F_01", "F_02"})
 	)
 	private Set<Permission> permissions = new HashSet<>();
 

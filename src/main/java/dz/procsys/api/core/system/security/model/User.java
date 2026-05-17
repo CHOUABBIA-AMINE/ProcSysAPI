@@ -1,6 +1,6 @@
 /**
  *	
- *	@Author		: Amine CHOUABBIA
+ *	@Author		: MEDJERAB Abir
  *
  *	@Name		: User
  *	@CreatedOn	: 06-26-2025
@@ -62,8 +62,6 @@ import lombok.ToString;
 @Schema(description = "User account with Spring Security integration, roles, groups, and employee association")
 @Setter
 @Getter
-@ToString
-@EqualsAndHashCode(callSuper = true)
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -107,8 +105,7 @@ public class User extends GenericModel implements UserDetails {
         accessMode = Schema.AccessMode.WRITE_ONLY
     )
     @NotBlank(message = "Password is mandatory")
-    @Pattern(regexp = "^[a-zA-Z0-9._-]{8,120}$")
-    @Size(min = 8, message = "Password must be at least 8 characters")
+    @Size(min = 60, message = "Password must be at least 8 characters")
     @JsonIgnore
     @Column(name="F_03", length=120, nullable=false)
     private String password;

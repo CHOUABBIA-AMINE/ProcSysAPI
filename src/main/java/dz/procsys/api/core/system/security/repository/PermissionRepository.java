@@ -1,6 +1,6 @@
 /**
  *	
- *	@Author		: Amine CHOUABBIA
+ *	@Author		: MEDJERAB Abir
  *
  *	@Name		: PermissionRepository
  *	@CreatedOn	: 06-26-2025
