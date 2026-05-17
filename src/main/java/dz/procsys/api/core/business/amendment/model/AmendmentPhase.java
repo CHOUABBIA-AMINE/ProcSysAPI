@@ -2,24 +2,24 @@
  *	
  *	@author		: CHOUABBIA Amine
  *
- *	@Name		: ConsultationStep
+ *	@Name		: AmendmentPhase
  *	@CreatedOn	: 06-26-2025
  *	@Updated	: 12-10-2025
  *
  *	@Type		: Class
  *	@Layer		: Model
- *	@Package	: Business / Consultation
+ *	@Package	: Business / Amendment
  *
  **/
 
-package dz.procsys.api.core.workflow.definition.model;
+package dz.procsys.api.core.business.amendment.model;
+
+import java.util.List;
 
 import dz.procsys.api.platform.kernel.GenericModel;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.ForeignKey;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
@@ -35,9 +35,9 @@ import lombok.ToString;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name="ConsultationStep")
-@Table(name="T_02_04_03", uniqueConstraints = { @UniqueConstraint(name = "T_02_04_03_UK_01", columnNames = { "F_03" })})
-public class ConsultationStep extends GenericModel {
+@Entity(name="AmendmentPhase")
+@Table(name="T_02_06_02", uniqueConstraints = { @UniqueConstraint(name = "T_02_06_02_UK_01", columnNames = { "F_03" })})
+public class AmendmentPhase extends GenericModel {
 	
 	@Column(name="F_01", length=200)
 	private String designationAr;
@@ -48,8 +48,7 @@ public class ConsultationStep extends GenericModel {
 	@Column(name="F_03", length=200, nullable=false)
 	private String designationFr;
 	
-	@ManyToOne
-    @JoinColumn(name="F_04", foreignKey=@ForeignKey(name="T_02_04_03_FK_01"), nullable=false)
-    private ConsultationPhase consultationPhase;
+	@OneToMany(mappedBy="amendmentPhase")
+    private List<AmendmentStep> amendmentSteps;
 
 }

@@ -2,17 +2,17 @@
  *	
  *	@author		: CHOUABBIA Amine
  *
- *	@Name		: ContractStep
+ *	@Name		: AmendmentStep
  *	@CreatedOn	: 06-26-2025
  *	@Updated	: 12-10-2025
  *
  *	@Type		: Class
  *	@Layer		: Model
- *	@Package	: Business / Contract
+ *	@Package	: Business / Amendment
  *
  **/
 
-package dz.procsys.api.core.workflow.definition.model;
+package dz.procsys.api.core.business.amendment.model;
 
 import dz.procsys.api.platform.kernel.GenericModel;
 import jakarta.persistence.Column;
@@ -35,9 +35,9 @@ import lombok.ToString;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name="ContractStep")
-@Table(name="T_02_05_03", uniqueConstraints = { @UniqueConstraint(name = "T_02_05_03_UK_01", columnNames = { "F_03" })})
-public class ContractStep extends GenericModel {
+@Entity(name="AmendmentStep")
+@Table(name="T_02_06_03", uniqueConstraints = { @UniqueConstraint(name = "T_02_06_03_UK_01", columnNames = { "F_03" })})
+public class AmendmentStep extends GenericModel {
 	
 	@Column(name="F_01", length=200)
 	private String designationAr;
@@ -49,7 +49,7 @@ public class ContractStep extends GenericModel {
 	private String designationFr;
 	
 	@ManyToOne
-    @JoinColumn(name="F_04", referencedColumnName = "F_00", foreignKey=@ForeignKey(name="T_02_05_03_FK_01"), nullable=false)
-    private ContractPhase contractPhase;
+    @JoinColumn(name="F_04", foreignKey=@ForeignKey(name="T_02_06_03_FK_01"), nullable=false)
+    private AmendmentPhase amendmentPhase;
 
 }

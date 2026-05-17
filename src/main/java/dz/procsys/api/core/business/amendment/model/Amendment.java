@@ -18,13 +18,11 @@ import java.util.Date;
 import java.util.List;
 
 import dz.procsys.api.core.business.contract.model.Contract;
-import dz.procsys.api.core.business.core.model.AmendmentType;
 import dz.procsys.api.core.business.core.model.ApprovalStatus;
 import dz.procsys.api.core.business.core.model.Currency;
 import dz.procsys.api.core.business.core.model.ProcurementStatus;
 import dz.procsys.api.core.common.communication.model.Mail;
 import dz.procsys.api.core.common.document.model.Document;
-import dz.procsys.api.core.workflow.definition.model.AmendmentStep;
 import dz.procsys.api.platform.kernel.GenericModel;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

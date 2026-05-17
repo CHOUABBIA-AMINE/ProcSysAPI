@@ -12,7 +12,7 @@
  *
  **/
 
-package dz.procsys.api.core.business.core.model;
+package dz.procsys.api.core.business.contract.model;
 
 import dz.procsys.api.platform.kernel.GenericModel;
 import jakarta.persistence.Column;

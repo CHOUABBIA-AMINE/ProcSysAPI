@@ -12,7 +12,7 @@
  *
  **/
 
-package dz.procsys.api.core.workflow.definition.model;
+package dz.procsys.api.core.business.consultation.model;
 
 import java.util.List;
 

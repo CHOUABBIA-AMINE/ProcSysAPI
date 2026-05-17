@@ -4,7 +4,7 @@
  *
  *	@Name		: User
  *	@CreatedOn	: 06-26-2025
- *	@UpdatedOn	: 02-13-206
+ *	@UpdatedOn	: 02-13-2026
  *
  *	@Type		: Class
  *	@Layer		: Model

@@ -2,7 +2,7 @@
  *	
  *	@Author		: CHOUABBIA Amine
  *
- *	@Name		: Authority
+ *	@Name		: Action
  *	@CreatedOn	: 06-26-2025
  *	@UpdatedOn	: 12-11-2025
  *
