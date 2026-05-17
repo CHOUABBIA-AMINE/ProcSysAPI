@@ -17,7 +17,7 @@ package dz.procsys.api.core.common.communication.model;
 import java.time.LocalDateTime;
 
 import dz.procsys.api.core.system.security.model.User;
-import dz.procsys.api.platform.kernel.GenericModel;
+import dz.procsys.api.platform.kernel.model.GenericModel;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

@@ -20,7 +20,7 @@
 
 package dz.procsys.api.core.workflow.definition.model;
 
-import dz.procsys.api.platform.kernel.GenericModel;
+import dz.procsys.api.platform.kernel.model.GenericModel;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

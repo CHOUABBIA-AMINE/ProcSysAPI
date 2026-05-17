@@ -16,7 +16,7 @@ package dz.procsys.api.core.business.contract.model;
 
 import java.util.List;
 
-import dz.procsys.api.platform.kernel.GenericModel;
+import dz.procsys.api.platform.kernel.model.GenericModel;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;

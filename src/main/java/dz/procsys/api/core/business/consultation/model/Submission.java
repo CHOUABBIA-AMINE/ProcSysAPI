@@ -18,7 +18,7 @@ import java.util.Date;
 
 import dz.procsys.api.core.business.provider.model.Provider;
 import dz.procsys.api.core.system.utility.model.File;
-import dz.procsys.api.platform.kernel.GenericModel;
+import dz.procsys.api.platform.kernel.model.GenericModel;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ForeignKey;

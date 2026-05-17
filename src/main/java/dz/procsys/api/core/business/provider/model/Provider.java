@@ -21,7 +21,7 @@ import dz.procsys.api.core.business.consultation.model.Submission;
 import dz.procsys.api.core.common.administration.model.Country;
 import dz.procsys.api.core.common.administration.model.State;
 import dz.procsys.api.core.system.utility.model.File;
-import dz.procsys.api.platform.kernel.GenericModel;
+import dz.procsys.api.platform.kernel.model.GenericModel;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
