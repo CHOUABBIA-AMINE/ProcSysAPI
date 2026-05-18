@@ -18,10 +18,10 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-import dz.procsys.api.core.business.core.model.ApprovalStatus;
-import dz.procsys.api.core.business.core.model.ProcurementDirector;
-import dz.procsys.api.core.business.core.model.ProcurementNature;
-import dz.procsys.api.core.business.core.model.ProcurementStatus;
+import dz.procsys.api.core.business.shared.model.ApprovalStatus;
+import dz.procsys.api.core.business.shared.model.ProcurementDirector;
+import dz.procsys.api.core.business.shared.model.ProcurementNature;
+import dz.procsys.api.core.business.shared.model.ProcurementStatus;
 import dz.procsys.api.core.business.plan.model.BudgetType;
 import dz.procsys.api.core.business.plan.model.PlannedItem;
 import dz.procsys.api.core.common.communication.model.Mail;

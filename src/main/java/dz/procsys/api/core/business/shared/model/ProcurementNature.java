@@ -8,11 +8,11 @@
  *
  *	@Type		: Class
  *	@Layer		: Model
- *	@Package	: Business / Core
+ *	@Package	: Business / Shared
  *
  **/
 
-package dz.procsys.api.core.business.core.model;
+package dz.procsys.api.core.business.shared.model;
 
 import dz.procsys.api.platform.kernel.model.GenericModel;
 import jakarta.persistence.Column;

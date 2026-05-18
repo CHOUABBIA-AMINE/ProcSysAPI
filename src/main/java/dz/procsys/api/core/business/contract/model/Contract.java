@@ -19,9 +19,9 @@ import java.util.Date;
 import java.util.List;
 
 import dz.procsys.api.core.business.consultation.model.Consultation;
-import dz.procsys.api.core.business.core.model.ApprovalStatus;
-import dz.procsys.api.core.business.core.model.Currency;
-import dz.procsys.api.core.business.core.model.ProcurementStatus;
+import dz.procsys.api.core.business.shared.model.ApprovalStatus;
+import dz.procsys.api.core.business.shared.model.Currency;
+import dz.procsys.api.core.business.shared.model.ProcurementStatus;
 import dz.procsys.api.core.business.plan.model.PlannedItem;
 import dz.procsys.api.core.business.provider.model.Provider;
 import dz.procsys.api.core.common.communication.model.Mail;

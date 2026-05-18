@@ -2,17 +2,17 @@
  *	
  *	@author		: CHOUABBIA Amine
  *
- *	@Name		: ApprovalStatus
+ *	@Name		: ProcurementStatus
  *	@CreatedOn	: 06-26-2025
  *	@Updated	: 12-10-2025
  *
  *	@Type		: Class
  *	@Layer		: Model
- *	@Package	: Business / Core
+ *	@Package	: Business / Shared
  *
  **/
 
-package dz.procsys.api.core.business.core.model;
+package dz.procsys.api.core.business.shared.model;
 
 import dz.procsys.api.platform.kernel.model.GenericModel;
 import jakarta.persistence.Column;
@@ -27,9 +27,9 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * ApprovalStatus Entity - Extends GenericModel
+ * ProcurementStatus Entity - Extends GenericModel
  * 
- * Database table: T_02_01_02
+ * Database table: T_02_01_05
  * Primary key: F_00 (id) - inherited from GenericModel
  * 
  * Fields:
@@ -44,9 +44,9 @@ import lombok.ToString;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name="ApprovalStatus")
-@Table(name="T_02_01_02", uniqueConstraints = {@UniqueConstraint(name = "T_02_01_02_UK_01", columnNames = { "F_03" })})
-public class ApprovalStatus extends GenericModel {
+@Entity(name="ProcurementStatus")
+@Table(name="T_02_01_05", uniqueConstraints = { @UniqueConstraint(name = "T_02_01_05_UK_01", columnNames = { "F_03" })})
+public class ProcurementStatus extends GenericModel {
 	
 	@Column(name="F_01", length=200)
 	private String designationAr;
@@ -59,14 +59,12 @@ public class ApprovalStatus extends GenericModel {
 
 }
 /*
-INSERT INTO T_02_01_02 (F_00, F_01, F_02, F_03) VALUES
-(1,'غير قابل للتطبيق﻿','Not Applicabale','Non applicable'),
-(2,'قيد التحضير','Under Preparation','En cours de préparation'),
-(3,'تأشيرة','Visa','Visa'),
-(4,'تأشيرة مع توصيات','Visa with Recommendations','Visa avec recommandations'),
-(5,'تأشيرة مع تحفظات','Visa under Reservations','Visa sous réserves'),
-(6,'تأجيل','Adjournment','Ajournement'),
-(7,'رفض','Rejection','Rejet'),
-(8,'رفض مؤقت','Temporary Rejection','Rejet à titre temporaire'),
-(9,'رفض نهائي','Definitive Rejection','Rejet définitif');
+INSERT INTO T_02_01_05 (F_00, F_01, F_02, F_03) VALUES
+(1,'قيد الانتظار','On Hold','En Instance'),
+(2,'قيد التنفيذ','Ongoing','En cours'),
+(3,'غيرمجدي','Defective','Infrectieux'),
+(4,'مُنجز','Finalized','Finalisé'),
+(5,'ملغي','Canceled','Annulé'),
+(6,'مؤجل','Deferred','Différé'),
+(7,'منقول','Transferred','Transféré');
 */
