@@ -55,7 +55,7 @@ public class Clearance extends GenericModel {
 	
 	@ManyToOne
     @JoinColumn(name="F_05", referencedColumnName = "F_00", foreignKey=@ForeignKey(name="T_02_03_06_FK_02"), nullable=false)
-    private ProviderRepresentator providerRepresentator;
+    private ProviderRepresentative providerRepresentative;
 
 	@ManyToOne
     @JoinColumn(name="F_06", referencedColumnName = "F_00", foreignKey=@ForeignKey(name="T_02_03_06_FK_03"), nullable=true)

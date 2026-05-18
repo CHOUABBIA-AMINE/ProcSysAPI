@@ -2,7 +2,7 @@
  *	
  *	@author		: CHOUABBIA Amine
  *
- *	@Name		: ProviderRepresentator
+ *	@Name		: ProviderRepresentative
  *	@CreatedOn	: 06-26-2025
  *	@Updated	: 12-10-2025
  *
@@ -37,9 +37,9 @@ import lombok.ToString;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name="ProviderRepresentator")
+@Entity(name="ProviderRepresentative")
 @Table(name="T_02_03_05")
-public class ProviderRepresentator extends GenericModel {
+public class ProviderRepresentative extends GenericModel {
 	
 	@Column(name="F_01", length=50, nullable=false)
 	private String firstname;

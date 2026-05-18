@@ -14,6 +14,8 @@
 
 package dz.procsys.api.core.business.contract.model;
 
+import java.math.BigDecimal;
+
 import dz.procsys.api.platform.kernel.model.GenericModel;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -48,8 +50,8 @@ public class ContractItem extends GenericModel {
 	@Column(name="F_03")
 	private double quantity;
 	
-	@Column(name="F_04")
-	private double unitPrice;
+	@Column(name="F_04", precision=18, scale=2, nullable=true)
+	private BigDecimal unitPrice;
 	
 	@Column(name="F_05")
 	private String observation;

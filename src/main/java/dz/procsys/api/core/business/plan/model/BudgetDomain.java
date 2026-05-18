@@ -2,7 +2,7 @@
  *	
  *	@author		: CHOUABBIA Amine
  *
- *	@Name		: Domain
+ *	@Name		: BudgetDomain
  *	@CreatedOn	: 06-26-2025
  *	@Updated	: 12-10-2025
  *
@@ -35,9 +35,9 @@ import lombok.ToString;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name="Domain")
+@Entity(name="BudgetDomain")
 @Table(name="T_02_02_04", uniqueConstraints = { @UniqueConstraint(name = "T_02_02_04_UK_01", columnNames = { "F_03" })})
-public class Domain extends GenericModel {
+public class BudgetDomain extends GenericModel {
 	
 	@Column(name="F_01", length=200)
 	private String designationAr;
@@ -49,6 +49,6 @@ public class Domain extends GenericModel {
 	private String designationFr;
 	
 	@OneToMany(mappedBy="domain")
-    private List<Rubric> rubrics;
+    private List<BudgetRubric> budgetRubrics;
 
 }

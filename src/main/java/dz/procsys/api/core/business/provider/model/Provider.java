@@ -14,6 +14,7 @@
 
 package dz.procsys.api.core.business.provider.model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -65,8 +66,8 @@ public class Provider extends GenericModel {
 	@Column(name="F_05", length=200)
 	private String address;
 	
-	@Column(name="F_06", length=200)
-	private double capital;
+	@Column(name="F_06", precision=18, scale=2, nullable=true)
+	private BigDecimal capital;
 	
 	@Column(name="F_07", length=200)
 	private String comercialRegistryNumber;
@@ -121,7 +122,7 @@ public class Provider extends GenericModel {
 	private List<ProviderExclusion> providerExclusions;
 	
 	@OneToMany(mappedBy ="provider")
-	private List<ProviderRepresentator> providerRepresentators;
+	private List<ProviderRepresentative> providerRepresentatives;
 	
 	@OneToMany(mappedBy ="provider")
 	private List<Clearance> clearances;

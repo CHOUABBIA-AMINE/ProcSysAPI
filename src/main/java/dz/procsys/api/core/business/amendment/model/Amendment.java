@@ -14,6 +14,7 @@
 
 package dz.procsys.api.core.business.amendment.model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -23,6 +24,7 @@ import dz.procsys.api.core.business.core.model.Currency;
 import dz.procsys.api.core.business.core.model.ProcurementStatus;
 import dz.procsys.api.core.common.communication.model.Mail;
 import dz.procsys.api.core.common.document.model.Document;
+import dz.procsys.api.core.workflow.execution.model.WorkflowInstance;
 import dz.procsys.api.platform.kernel.model.GenericModel;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -66,11 +68,11 @@ public class Amendment extends GenericModel {
 	@Column(name="F_05", length=300)
 	private String designationFr;
 	
-	@Column(name="F_06")
-	private double amount;
+	@Column(name="F_06", precision=18, scale=2, nullable=true)
+	private BigDecimal amount;
 	
-	@Column(name="F_07")
-	private double transferableAmount;
+	@Column(name="F_07", precision=18, scale=2, nullable=true)
+	private BigDecimal transferableAmount;
 	
 	@Column(name="F_08")
 	private Date startDate;
@@ -107,6 +109,10 @@ public class Amendment extends GenericModel {
 	@ManyToOne
     @JoinColumn(name="F_17", referencedColumnName = "F_00", foreignKey=@ForeignKey(name="T_02_06_04_FK_06"), nullable=false)
     private Currency currency;
+	
+	@ManyToOne
+	@JoinColumn(name="F_18", referencedColumnName = "F_00", foreignKey=@ForeignKey(name="T_02_05_01_FK_09"), nullable = true)
+	private WorkflowInstance workflowInstance;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(

@@ -14,6 +14,7 @@
 
 package dz.procsys.api.core.business.contract.model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -25,6 +26,7 @@ import dz.procsys.api.core.business.plan.model.PlannedItem;
 import dz.procsys.api.core.business.provider.model.Provider;
 import dz.procsys.api.core.common.communication.model.Mail;
 import dz.procsys.api.core.common.document.model.Document;
+import dz.procsys.api.core.workflow.execution.model.WorkflowInstance;
 import dz.procsys.api.platform.kernel.model.GenericModel;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -72,11 +74,11 @@ public class Contract extends GenericModel {
 	@Column(name="F_06", length=300, nullable=false)
 	private String designationFr;
 	
-	@Column(name="F_07")
-	private double amount;
+	@Column(name="F_07", precision=18, scale=2, nullable=true)
+	private BigDecimal amount;
 	
-	@Column(name="F_08")
-	private double transferableAmount;
+	@Column(name="F_08", precision=18, scale=2, nullable=true)
+	private BigDecimal transferableAmount;
 	
 	@Column(name="F_09")
 	private Date startDate;
@@ -130,6 +132,10 @@ public class Contract extends GenericModel {
 	@ManyToOne
     @JoinColumn(name="F_23", referencedColumnName = "F_00", foreignKey=@ForeignKey(name="T_02_05_04_FK_08"), nullable=true)
     private Contract contractUp;
+	
+	@ManyToOne
+	@JoinColumn(name="F_24", referencedColumnName = "F_00", foreignKey=@ForeignKey(name="T_02_05_01_FK_09"), nullable = true)
+	private WorkflowInstance workflowInstance;
 	
 	@OneToMany(mappedBy="contract")
 	private List<ContractItem> contractItems;

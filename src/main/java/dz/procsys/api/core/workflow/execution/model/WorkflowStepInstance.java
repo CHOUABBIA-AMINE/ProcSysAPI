@@ -16,8 +16,11 @@
  *
  **/
 
-package dz.procsys.api.core.workflow.definition.model;
+package dz.procsys.api.core.workflow.execution.model;
 
+import java.time.LocalDateTime;
+
+import dz.procsys.api.core.workflow.definition.model.WorkflowStepDefinition;
 import dz.procsys.api.platform.kernel.model.GenericModel;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -32,8 +35,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-
-import java.time.LocalDateTime;
 
 /**
  * WorkflowStepInstance - Execution record of one step in a WorkflowInstance.

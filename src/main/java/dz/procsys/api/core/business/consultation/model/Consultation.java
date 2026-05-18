@@ -14,6 +14,7 @@
 
 package dz.procsys.api.core.business.consultation.model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -25,6 +26,7 @@ import dz.procsys.api.core.business.plan.model.BudgetType;
 import dz.procsys.api.core.business.plan.model.PlannedItem;
 import dz.procsys.api.core.common.communication.model.Mail;
 import dz.procsys.api.core.common.document.model.Document;
+import dz.procsys.api.core.workflow.execution.model.WorkflowInstance;
 import dz.procsys.api.platform.kernel.model.GenericModel;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -72,11 +74,11 @@ public class Consultation extends GenericModel {
 	@Column(name="F_06", length=300, nullable=false)
 	private String designationFr;
 	
-	@Column(name="F_07")
-	private double allocatedAmount;
+	@Column(name="F_07", precision=18, scale=2, nullable=false)
+	private BigDecimal allocatedAmount;
 	
-	@Column(name="F_08")
-	private double financialEstimation;
+	@Column(name="F_08", precision=18, scale=2, nullable=true)
+	private BigDecimal financialEstimation;
 	
 	@Column(name="F_09")
 	private Date startDate;
@@ -123,6 +125,10 @@ public class Consultation extends GenericModel {
 	@ManyToOne
     @JoinColumn(name="F_21", referencedColumnName = "F_00", foreignKey=@ForeignKey(name="T_02_04_04_FK_07"), nullable=false)
     private ConsultationStep consultationStep;
+	
+	@ManyToOne
+	@JoinColumn(name="F_22", referencedColumnName = "F_00", foreignKey=@ForeignKey(name="T_02_04_04_FK_08"), nullable=true)
+	private WorkflowInstance workflowInstance;
 	
 	//@ManyToOne
     //@JoinColumn(name="F_22", foreignKey=@ForeignKey(name="T_22_04_FK_08"), nullable=false)

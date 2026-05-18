@@ -2,7 +2,7 @@
  *	
  *	@author		: CHOUABBIA Amine
  *
- *	@Name		: Rubric
+ *	@Name		: BudgetRubric
  *	@CreatedOn	: 06-26-2025
  *	@Updated	: 12-10-2025
  *
@@ -38,9 +38,9 @@ import lombok.ToString;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name="Rubric")
+@Entity(name="BudgetRubric")
 @Table(name="T_02_02_05", uniqueConstraints = { @UniqueConstraint(name = "T_02_02_05_UK_01", columnNames = { "F_03" })})
-public class Rubric extends GenericModel {
+public class BudgetRubric extends GenericModel {
 	
 	@Column(name="F_01", length=200)
 	private String designationAr;
@@ -53,9 +53,9 @@ public class Rubric extends GenericModel {
 	
 	@ManyToOne
     @JoinColumn(name="F_04", referencedColumnName = "F_00", foreignKey=@ForeignKey(name="T_02_02_05_FK_01"), nullable=false)
-    private Domain domain;
+    private BudgetDomain budgetDomain;
 	
 	@OneToMany(mappedBy="rubric")
-    private List<Item> items;
+    private List<BudgetItem> budgetItems;
 
 }

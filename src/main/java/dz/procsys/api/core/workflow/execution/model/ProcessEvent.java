@@ -16,7 +16,7 @@
  *
  **/
 
-package dz.procsys.api.core.workflow.definition.model;
+package dz.procsys.api.core.workflow.execution.model;
 
 import dz.procsys.api.platform.kernel.model.GenericModel;
 import jakarta.persistence.Column;

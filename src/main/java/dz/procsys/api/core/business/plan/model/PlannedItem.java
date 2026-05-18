@@ -14,6 +14,8 @@
 
 package dz.procsys.api.core.business.plan.model;
 
+import java.math.BigDecimal;
+
 import dz.procsys.api.platform.kernel.model.GenericModel;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -41,14 +43,14 @@ public class PlannedItem extends GenericModel {
 	@Column(name="F_01", length=200, nullable=false)
 	private String designation;
 	
-	@Column(name="F_02")
-	private double unitairCost;
+	@Column(name="F_02", precision=18, scale=2, nullable=true)
+	private BigDecimal unitairCost;
 	
 	@Column(name="F_03")
 	private double planedQuantity;
 	
-	@Column(name="F_04")
-	private double allocatedAmount;
+	@Column(name="F_04", precision=18, scale=2, nullable=true)
+	private BigDecimal allocatedAmount;
 	
 	@ManyToOne
     @JoinColumn(name="F_05", referencedColumnName = "F_00", foreignKey=@ForeignKey(name="T_02_02_08_FK_01"), nullable=false)
@@ -56,7 +58,7 @@ public class PlannedItem extends GenericModel {
 	
 	@ManyToOne
     @JoinColumn(name="F_06", referencedColumnName = "F_00", foreignKey=@ForeignKey(name="T_02_02_08_FK_02"), nullable=false)
-    private Item item;
+    private BudgetItem budgetItem;
 	
 	@ManyToOne
     @JoinColumn(name="F_07", referencedColumnName = "F_00", foreignKey=@ForeignKey(name="T_02_02_08_FK_03"), nullable=false)

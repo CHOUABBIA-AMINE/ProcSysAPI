@@ -16,8 +16,14 @@
  *
  **/
 
-package dz.procsys.api.core.workflow.definition.model;
+package dz.procsys.api.core.workflow.execution.model;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+import dz.procsys.api.core.workflow.definition.model.WorkflowDefinition;
+import dz.procsys.api.core.workflow.definition.model.WorkflowStepDefinition;
 import dz.procsys.api.platform.kernel.model.GenericModel;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -34,10 +40,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * WorkflowInstance - A running workflow attached to a business aggregate.

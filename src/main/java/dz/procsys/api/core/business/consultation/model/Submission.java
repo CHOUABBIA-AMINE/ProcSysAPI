@@ -14,10 +14,12 @@
 
 package dz.procsys.api.core.business.consultation.model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import dz.procsys.api.core.business.provider.model.Provider;
 import dz.procsys.api.core.system.utility.model.File;
+import dz.procsys.api.core.workflow.execution.model.WorkflowInstance;
 import dz.procsys.api.platform.kernel.model.GenericModel;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -46,8 +48,8 @@ public class Submission extends GenericModel {
 	@Column(name="F_01", nullable=true)
 	private Date submissionDate;
 	
-	@Column(name="F_02", nullable=true)
-	private double financialOffer;
+	@Column(name="F_02", precision=18, scale=2, nullable=true)
+	private BigDecimal financialOffer;
 	
 	@ManyToOne
     @JoinColumn(name="F_03", foreignKey=@ForeignKey(name="T_02_04_05_FK_01"), nullable=false)
@@ -68,5 +70,9 @@ public class Submission extends GenericModel {
 	@ManyToOne
     @JoinColumn(name="F_07", foreignKey=@ForeignKey(name="T_02_04_05_FK_05"), nullable=true)
     private File financialPart;
+	
+	@ManyToOne
+	@JoinColumn(name = "F_08", referencedColumnName = "F_00", foreignKey=@ForeignKey(name="T_02_04_05_FK_06"), nullable = true)
+	private WorkflowInstance workflowInstance;
 
 }

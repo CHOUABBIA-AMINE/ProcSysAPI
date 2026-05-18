@@ -20,6 +20,10 @@
 
 package dz.procsys.api.core.workflow.definition.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import dz.procsys.api.core.workflow.execution.model.WorkflowInstance;
 import dz.procsys.api.platform.kernel.model.GenericModel;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -34,9 +38,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * WorkflowDefinition - Blueprint for a procurement workflow process.
