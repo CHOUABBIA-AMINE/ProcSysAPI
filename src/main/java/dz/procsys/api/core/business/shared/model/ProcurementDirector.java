@@ -1,6 +1,6 @@
 /**
  *	
- *	@author		: CHOUABBIA Amine
+ *	@Author		: CHOUABBIA Amine
  *
  *	@Name		: ProcurementDirector
  *	@CreatedOn	: 06-26-2025
@@ -15,10 +15,13 @@
 package dz.procsys.api.core.business.shared.model;
 
 import dz.procsys.api.platform.kernel.model.GenericModel;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -27,40 +30,57 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * ProcurementDirector Entity - Extends GenericModel
- * 
- * Database table: T_02_01_03
- * Primary key: F_00 (id) - inherited from GenericModel
- * 
- * Fields:
- * - F_00: id (inherited) - Primary key
- * - F_01: designationAr - Arabic designation (optional)
- * - F_02: designationEn - English designation (optional)
- * - F_03: designationFr - French designation (unique, required)
+ * ProcurementDirector Entity - Extends GenericModel.
+ *
+ * Database table: T_02_01_03.
  */
+@Schema(
+    name = "ProcurementDirector",
+    description = "Reference entity listing procurement directorates involved in procurement processes"
+)
 @Setter
 @Getter
 @ToString
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name="ProcurementDirector")
-@Table(name="T_02_01_03", uniqueConstraints = { @UniqueConstraint(name = "T_02_01_03_UK_01", columnNames = { "F_03" })})
+@Entity(name = "ProcurementDirector")
+@Table(
+    name = "T_02_01_03",
+    uniqueConstraints = {
+        @UniqueConstraint(name = "T_02_01_03_UK_01", columnNames = { "F_03" })
+    }
+)
 public class ProcurementDirector extends GenericModel {
 	
-	@Column(name="F_01", length=300)
-	private String designationAr;
+    @Schema(
+        description = "Arabic designation of the procurement directorate",
+        example = "المديرية الفرعية للإنجازات",
+        requiredMode = Schema.RequiredMode.NOT_REQUIRED,
+        maxLength = 300
+    )
+    @Size(max = 300, message = "Arabic designation must not exceed 300 characters")
+    @Column(name = "F_01", length = 300)
+    private String designationAr;
 
-	@Column(name="F_02", length=300)
-	private String designationEn;
+    @Schema(
+        description = "English designation of the procurement directorate",
+        example = "Sub Directorate of Procurements",
+        requiredMode = Schema.RequiredMode.NOT_REQUIRED,
+        maxLength = 300
+    )
+    @Size(max = 300, message = "English designation must not exceed 300 characters")
+    @Column(name = "F_02", length = 300)
+    private String designationEn;
 	
-	@Column(name="F_03", length=300, nullable=false)
-	private String designationFr;
-
+    @Schema(
+        description = "French designation of the procurement directorate (primary, unique label)",
+        example = "Sous Direction Réalisations",
+        requiredMode = Schema.RequiredMode.REQUIRED,
+        maxLength = 300
+    )
+    @NotBlank(message = "French designation is mandatory")
+    @Size(max = 300, message = "French designation must not exceed 300 characters")
+    @Column(name = "F_03", length = 300, nullable = false)
+    private String designationFr;
 }
-
-/*
-INSERT INTO T_02_01_03 (F_00, F_01, F_02, F_03) VALUES
-(1, 'المديرية الفرعية للإنجازات', 'Sub Directorat of Procurements', 'Sous Direction Réalisations'),
-(2, 'دائرة المؤن', 'Approvisionment Department', 'Département des Approvisionnements');
- */

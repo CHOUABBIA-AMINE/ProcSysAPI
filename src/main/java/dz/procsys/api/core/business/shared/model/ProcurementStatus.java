@@ -1,6 +1,6 @@
 /**
  *	
- *	@author		: CHOUABBIA Amine
+ *	@Author		: CHOUABBIA Amine
  *
  *	@Name		: ProcurementStatus
  *	@CreatedOn	: 06-26-2025
@@ -15,10 +15,13 @@
 package dz.procsys.api.core.business.shared.model;
 
 import dz.procsys.api.platform.kernel.model.GenericModel;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -27,44 +30,57 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * ProcurementStatus Entity - Extends GenericModel
- * 
- * Database table: T_02_01_05
- * Primary key: F_00 (id) - inherited from GenericModel
- * 
- * Fields:
- * - F_00: id (inherited) - Primary key
- * - F_01: designationAr - Arabic designation (optional)
- * - F_02: designationEn - English designation (optional)
- * - F_03: designationFr - French designation (unique, required)
+ * ProcurementStatus Entity - Extends GenericModel.
+ *
+ * Database table: T_02_01_05.
  */
+@Schema(
+    name = "ProcurementStatus",
+    description = "Reference entity describing the status of procurements (on hold, ongoing, finalized, etc.)"
+)
 @Setter
 @Getter
 @ToString
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name="ProcurementStatus")
-@Table(name="T_02_01_05", uniqueConstraints = { @UniqueConstraint(name = "T_02_01_05_UK_01", columnNames = { "F_03" })})
+@Entity(name = "ProcurementStatus")
+@Table(
+    name = "T_02_01_05",
+    uniqueConstraints = {
+        @UniqueConstraint(name = "T_02_01_05_UK_01", columnNames = { "F_03" })
+    }
+)
 public class ProcurementStatus extends GenericModel {
 	
-	@Column(name="F_01", length=200)
-	private String designationAr;
+    @Schema(
+        description = "Arabic designation of the procurement status",
+        example = "قيد الانتظار",
+        requiredMode = Schema.RequiredMode.NOT_REQUIRED,
+        maxLength = 200
+    )
+    @Size(max = 200, message = "Arabic designation must not exceed 200 characters")
+    @Column(name = "F_01", length = 200)
+    private String designationAr;
 
-	@Column(name="F_02", length=200)
-	private String designationEn;
+    @Schema(
+        description = "English designation of the procurement status",
+        example = "On Hold",
+        requiredMode = Schema.RequiredMode.NOT_REQUIRED,
+        maxLength = 200
+    )
+    @Size(max = 200, message = "English designation must not exceed 200 characters")
+    @Column(name = "F_02", length = 200)
+    private String designationEn;
 	
-	@Column(name="F_03", length=200, nullable=false)
-	private String designationFr;
-
+    @Schema(
+        description = "French designation of the procurement status (primary, unique label)",
+        example = "En instance",
+        requiredMode = Schema.RequiredMode.REQUIRED,
+        maxLength = 200
+    )
+    @NotBlank(message = "French designation is mandatory")
+    @Size(max = 200, message = "French designation must not exceed 200 characters")
+    @Column(name = "F_03", length = 200, nullable = false)
+    private String designationFr;
 }
-/*
-INSERT INTO T_02_01_05 (F_00, F_01, F_02, F_03) VALUES
-(1,'قيد الانتظار','On Hold','En Instance'),
-(2,'قيد التنفيذ','Ongoing','En cours'),
-(3,'غيرمجدي','Defective','Infrectieux'),
-(4,'مُنجز','Finalized','Finalisé'),
-(5,'ملغي','Canceled','Annulé'),
-(6,'مؤجل','Deferred','Différé'),
-(7,'منقول','Transferred','Transféré');
-*/
