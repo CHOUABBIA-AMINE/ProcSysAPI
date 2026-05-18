@@ -1,14 +1,14 @@
 /**
- *  
- *  @Author     : CHOUABBIA Amine
  *
- *  @Name       : NotificationType
- *  @CreatedOn  : 02-01-2026
- *  @UpdatedOn  : 02-01-2026
+ *	@Author		: CHOUABBIA Amine
  *
- *  @Type       : Class
- *  @Layer      : Model
- *  @Package    : System / Notification
+ *	@Name		: NotificationType
+ *	@CreatedOn	: 02-01-2026
+ *	@UpdatedOn	: 02-01-2026
+ *
+ *	@Type		: Class
+ *	@Layer		: Model
+ *	@Package	: Common / Communication
  *
  **/
 
@@ -31,20 +31,15 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * Notification Type Entity
- * 
+ * Notification Type Entity.
+ *
  * Represents different categories of system notifications.
  * Used as reference data for notification classification.
- * 
- * Examples:
- * - READING_SUBMITTED: When a reader submits operational readings
- * - READING_VALIDATED: When a validator approves readings
- * - READING_REJECTED: When a validator rejects readings
- * - SYSTEM_ALERT: Critical system notifications
- * - WARNING: Warning messages
- * - INFO: General information
  */
-@Schema(description = "Notification type classification for system notifications")
+@Schema(
+    name = "NotificationType",
+    description = "Notification type classification for system notifications"
+)
 @Setter
 @Getter
 @ToString
@@ -131,7 +126,7 @@ public class NotificationType extends GenericModel {
     private String colorCode;
 
     @Schema(
-        description = "Priority level (1=Low, 2=Medium, 3=High, 4=Critical)",
+        description = "Priority level (1 = Low, 2 = Medium, 3 = High, 4 = Critical)",
         example = "3"
     )
     @Column(name = "F_08")
