@@ -91,9 +91,6 @@ public class WorkflowDefinition extends GenericModel {
     @Column(name = "F_04", length = 300)
     private String designationAr;
 
-    @Column(name = "F_05", length = 20, nullable = false)
-    private String version;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "F_06", referencedColumnName = "F_00",
         foreignKey = @ForeignKey(name = "T_03_01_01_FK_01"), nullable = false)
