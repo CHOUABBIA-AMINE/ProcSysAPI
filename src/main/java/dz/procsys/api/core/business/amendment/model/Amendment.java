@@ -26,6 +26,7 @@ import dz.procsys.api.core.common.communication.model.Mail;
 import dz.procsys.api.core.common.document.model.Document;
 import dz.procsys.api.core.workflow.execution.model.WorkflowInstance;
 import dz.procsys.api.platform.kernel.model.GenericModel;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -36,27 +37,42 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
+@Schema(description = "Contract's amandment holding data related to the process")
 @Setter
 @Getter
-@ToString
-@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name="Amendment")
 @Table(name="T_02_06_04", uniqueConstraints = { @UniqueConstraint(name = "T_02_06_04_UK_01", columnNames = { "F_02" })})
 public class Amendment extends GenericModel {
 	
+	@Schema(
+		description = "Internal Id : AM-01-16",
+		example = "AM-01-CT-01-2016",
+		requiredMode = Schema.RequiredMode.REQUIRED,
+		maxLength = 255
+	)
+	@NotNull(message = "Internal Id is mandatory")
 	@Column(name="F_01")
 	private int internalId;
 	
-	@Column(name="F_02")
+	@Schema(
+		description = "Consultation reference's (e.g., 'AM-01-CT-01-2016')",
+		example = "AM-01-CT-01-2016",
+		requiredMode = Schema.RequiredMode.NOT_REQUIRED,
+		maxLength = 25
+	)
+	@NotBlank(message = "Reference is mandatory")
+	@Size(max = 25, message = "Reference must not exceed 25 characters")
+	@Column(name="F_02", nullable=true, length=25)
 	private String reference;
 	
 	@Column(name="F_03", length=300)
