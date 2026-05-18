@@ -4,7 +4,7 @@
  *
  *	@Name		: WorkflowInstance
  *	@CreatedOn	: 05-15-2026
- *	@Updated	: 05-15-2026
+ *	@Updated	: 05-18-2026
  *
  *	@Type		: Class
  *	@Layer		: Model
@@ -24,6 +24,9 @@ import java.util.List;
 
 import dz.procsys.api.core.workflow.definition.model.WorkflowDefinition;
 import dz.procsys.api.core.workflow.definition.model.WorkflowStepDefinition;
+import dz.procsys.api.core.workflow.shared.model.WorkflowBusinessRef;
+import dz.procsys.api.core.workflow.shared.model.WorkflowInstanceStatus;
+import dz.procsys.api.core.workflow.shared.model.WorkflowProcessType;
 import dz.procsys.api.platform.kernel.model.GenericModel;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -50,9 +53,9 @@ import lombok.ToString;
  * Fields:
  *  - F_01 : workflowDefinition  (FK → T_03_01_01.F_00)
  *  - F_02 : currentStep         (FK → T_03_01_02.F_00, nullable when finished)
- *  - F_03 : businessContext     – domain context code (CONSULTATION | CONTRACT | AMENDMENT | PLAN)
- *  - F_04 : businessKey         – String representation of the owning aggregate ID
- *  - F_05 : instanceStatus      – ACTIVE | COMPLETED | CANCELLED | SUSPENDED
+ *  - F_03 : workflowProcessType (FK → T_03_00_01.F_00)
+ *  - F_04 : businessRef         (FK → T_03_00_05.F_00)
+ *  - F_05 : instanceStatus      (FK → T_03_00_02.F_00)
  *  - F_06 : startedAt           – when the instance was created
  *  - F_07 : completedAt         – when the instance reached a terminal step
  *  - F_08 : startedBy           – username of the actor who started the workflow
@@ -79,27 +82,20 @@ public class WorkflowInstance extends GenericModel {
         foreignKey = @ForeignKey(name = "T_03_02_01_FK_02"))
     private WorkflowStepDefinition currentStep;
 
-    /**
-     * Identifies the domain owning this instance.
-     * Must match WorkflowDefinition.businessContext.
-     * CONSULTATION | CONTRACT | AMENDMENT | PLAN
-     */
-    @Column(name = "F_03", length = 60, nullable = false)
-    private String businessContext;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "F_03", referencedColumnName = "F_00",
+        foreignKey = @ForeignKey(name = "T_03_02_01_FK_03"), nullable = false)
+    private WorkflowProcessType workflowProcessType;
 
-    /**
-     * String representation of the owning aggregate primary key.
-     * E.g. "42" for Consultation with id=42.
-     * Kept as String for polymorphic binding across all contexts.
-     */
-    @Column(name = "F_04", length = 100, nullable = false)
-    private String businessKey;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "F_04", referencedColumnName = "F_00",
+        foreignKey = @ForeignKey(name = "T_03_02_01_FK_04"), nullable = false)
+    private WorkflowBusinessRef businessRef;
 
-    /**
-     * Lifecycle status: ACTIVE | COMPLETED | CANCELLED | SUSPENDED
-     */
-    @Column(name = "F_05", length = 20, nullable = false)
-    private String instanceStatus = "ACTIVE";
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "F_05", referencedColumnName = "F_00",
+        foreignKey = @ForeignKey(name = "T_03_02_01_FK_05"), nullable = false)
+    private WorkflowInstanceStatus instanceStatus;
 
     @Column(name = "F_06", nullable = false)
     private LocalDateTime startedAt;
