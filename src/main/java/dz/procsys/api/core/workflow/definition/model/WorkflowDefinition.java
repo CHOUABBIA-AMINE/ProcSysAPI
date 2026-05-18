@@ -4,7 +4,7 @@
  *
  *	@Name		: WorkflowDefinition
  *	@CreatedOn	: 05-15-2026
- *	@Updated	: 05-15-2026
+ *	@Updated	: 05-18-2026
  *
  *	@Type		: Class
  *	@Layer		: Model
@@ -24,11 +24,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dz.procsys.api.core.workflow.execution.model.WorkflowInstance;
+import dz.procsys.api.core.workflow.shared.model.WorkflowProcessType;
 import dz.procsys.api.platform.kernel.model.GenericModel;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.ForeignKey;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
@@ -46,20 +50,19 @@ import lombok.ToString;
  * Primary key  : F_00 (id) - inherited from GenericModel
  *
  * Fields:
- *  - F_01 : code            – unique technical code  (e.g. CONS_PROCESS)
- *  - F_02 : designationFr   – French label (required)
- *  - F_03 : designationEn   – English label
- *  - F_04 : designationAr   – Arabic label
- *  - F_05 : version         – version string (e.g. "1.0")
- *  - F_06 : businessContext – the domain this definition belongs to
- *                             (CONSULTATION | CONTRACT | AMENDMENT | PLAN)
- *  - F_07 : active          – whether this definition is currently usable
- *  - F_08 : description     – optional long description
+ *  - F_01 : code                – unique technical code  (e.g. CONS_PROCESS)
+ *  - F_02 : designationFr       – French label (required)
+ *  - F_03 : designationEn       – English label
+ *  - F_04 : designationAr       – Arabic label
+ *  - F_05 : version             – version string (e.g. "1.0")
+ *  - F_06 : workflowProcessType – FK → T_03_00_01 (reference, not hardcoded)
+ *  - F_07 : active              – whether this definition is currently usable
+ *  - F_08 : description         – optional long description
  *
  * INSERT INTO T_03_01_01 (F_00,F_01,F_02,F_03,F_04,F_05,F_06,F_07) VALUES
- *  (1,'CONS_PROCESS','Processus de consultation','Consultation Process',null,'1.0','CONSULTATION',1),
- *  (2,'CONTRACT_PROCESS','Processus de contrat','Contract Process',null,'1.0','CONTRACT',1),
- *  (3,'AMENDMENT_PROCESS','Processus d avenant','Amendment Process',null,'1.0','AMENDMENT',1);
+ *  (1,'CONS_PROCESS','Processus de consultation','Consultation Process',null,'1.0',1,1),
+ *  (2,'CONTRACT_PROCESS','Processus de contrat','Contract Process',null,'1.0',2,1),
+ *  (3,'AMENDMENT_PROCESS','Processus d avenant','Amendment Process',null,'1.0',3,1);
  */
 @Setter
 @Getter
@@ -91,12 +94,10 @@ public class WorkflowDefinition extends GenericModel {
     @Column(name = "F_05", length = 20, nullable = false)
     private String version;
 
-    /**
-     * Business context identifier — which bounded context owns this definition.
-     * E.g.: CONSULTATION, CONTRACT, AMENDMENT, PLAN
-     */
-    @Column(name = "F_06", length = 60, nullable = false)
-    private String businessContext;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "F_06", referencedColumnName = "F_00",
+        foreignKey = @ForeignKey(name = "T_03_01_01_FK_01"), nullable = false)
+    private WorkflowProcessType workflowProcessType;
 
     @Column(name = "F_07", nullable = false)
     private boolean active = true;
