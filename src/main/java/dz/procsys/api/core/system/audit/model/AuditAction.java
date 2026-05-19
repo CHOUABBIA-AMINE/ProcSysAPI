@@ -52,31 +52,14 @@ import lombok.ToString;
 @Builder
 @Entity(name = "AuditAction")
 @Table(
-    name = "T_00_04_07",
+    name = "T_00_03_07",
     indexes = {
-        @Index(name = "IDX__T_00_04_07__ACTION_TYPE", columnList = "F_01"),
-        @Index(name = "IDX__T_00_04_07__STATUS", columnList = "F_02"),
-        @Index(name = "IDX__T_00_04_07__OUTCOME", columnList = "F_04")
+        @Index(name = "IDX_T_00_03_07_01", columnList = "F_05"),
+        @Index(name = "IDX_T_00_03_07_02", columnList = "F_01"),
+        @Index(name = "IDX_T_00_03_07_03", columnList = "F_03")
     }
 )
 public class AuditAction extends GenericModel {
-
-    /**
-     * Classification of the action performed (FK to AuditActionType).
-     */
-    @Schema(
-        description = "Classification of the action performed",
-        requiredMode = Schema.RequiredMode.REQUIRED
-    )
-    @NotNull(message = "Action type is mandatory")
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(
-        name = "F_01",
-        referencedColumnName = "F_00",
-        foreignKey = @ForeignKey(name = "FK__T_00_04_07__ACTION_TYPE"),
-        nullable = false
-    )
-    private AuditActionType actionType;
 
     /**
      * Execution status of the action: SUCCESS, FAILED, PARTIAL.
@@ -89,7 +72,7 @@ public class AuditAction extends GenericModel {
     )
     @NotBlank(message = "Status is mandatory")
     @Size(max = 50, message = "Status must not exceed 50 characters")
-    @Column(name = "F_02", length = 50, nullable = false)
+    @Column(name = "F_01", length = 50, nullable = false)
     private String status;
 
     /**
@@ -100,7 +83,7 @@ public class AuditAction extends GenericModel {
         example = "142",
         requiredMode = Schema.RequiredMode.NOT_REQUIRED
     )
-    @Column(name = "F_03")
+    @Column(name = "F_02")
     private Long durationMs;
 
     /**
@@ -113,7 +96,7 @@ public class AuditAction extends GenericModel {
         maxLength = 1000
     )
     @Size(max = 1000, message = "Outcome description must not exceed 1000 characters")
-    @Column(name = "F_04", length = 1000)
+    @Column(name = "F_03", length = 1000)
     private String outcomeDescription;
 
     /**
@@ -123,6 +106,23 @@ public class AuditAction extends GenericModel {
         description = "Error message if the action execution failed",
         requiredMode = Schema.RequiredMode.NOT_REQUIRED
     )
-    @Column(name = "F_05", columnDefinition = "TEXT")
+    @Column(name = "F_04", columnDefinition = "TEXT")
     private String errorMessage;
+
+    /**
+     * Classification of the action performed (FK to AuditActionType).
+     */
+    @Schema(
+        description = "Classification of the action performed",
+        requiredMode = Schema.RequiredMode.REQUIRED
+    )
+    @NotNull(message = "Action type is mandatory")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(
+        name = "F_05",
+        referencedColumnName = "F_00",
+        foreignKey = @ForeignKey(name = "T_00_03_07_FK_01"),
+        nullable = false
+    )
+    private AuditActionType actionType;
 }

@@ -53,11 +53,11 @@ import lombok.ToString;
 @Builder
 @Entity(name = "AuditResource")
 @Table(
-    name = "T_00_04_06",
+    name = "T_00_03_06",
     indexes = {
-        @Index(name = "IDX__T_00_04_06__RESOURCE_REF", columnList = "F_01, F_03"),
-        @Index(name = "IDX__T_00_04_06__TYPE", columnList = "F_03"),
-        @Index(name = "IDX__T_00_04_06__MODULE", columnList = "F_04")
+        @Index(name = "IDX__T_00_03_06__RESOURCE_REF", columnList = "F_01, F_03"),
+        @Index(name = "IDX__T_00_03_06__TYPE", columnList = "F_03"),
+        @Index(name = "IDX__T_00_03_06__MODULE", columnList = "F_04")
     }
 )
 public class AuditResource extends GenericModel {
@@ -100,7 +100,7 @@ public class AuditResource extends GenericModel {
     @JoinColumn(
         name = "F_03",
         referencedColumnName = "F_00",
-        foreignKey = @ForeignKey(name = "FK__T_00_04_06__RESOURCE_TYPE"),
+        foreignKey = @ForeignKey(name = "FK__T_00_03_06__RESOURCE_TYPE"),
         nullable = false
     )
     private AuditResourceType resourceType;

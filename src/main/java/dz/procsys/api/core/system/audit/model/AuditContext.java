@@ -47,11 +47,11 @@ import lombok.ToString;
 @Builder
 @Entity(name = "AuditContext")
 @Table(
-    name = "T_00_04_08",
+    name = "T_00_03_08",
     indexes = {
-        @Index(name = "IDX__T_00_04_08__CORRELATION", columnList = "F_01"),
-        @Index(name = "IDX__T_00_04_08__REQUEST_ID", columnList = "F_02"),
-        @Index(name = "IDX__T_00_04_08__SERVICE", columnList = "F_05")
+        @Index(name = "IDX__T_00_03_08__CORRELATION", columnList = "F_01"),
+        @Index(name = "IDX__T_00_03_08__REQUEST_ID", columnList = "F_02"),
+        @Index(name = "IDX__T_00_03_08__SERVICE", columnList = "F_05")
     }
 )
 public class AuditContext extends GenericModel {

@@ -55,14 +55,14 @@ import lombok.ToString;
 @Builder
 @Entity(name = "AuditRetentionPolicy")
 @Table(
-    name = "T_00_04_13",
+    name = "T_00_03_13",
     uniqueConstraints = {
-        @UniqueConstraint(name = "UK__T_00_04_13__CODE", columnNames = {"F_01"})
+        @UniqueConstraint(name = "UK__T_00_03_13__CODE", columnNames = {"F_01"})
     },
     indexes = {
-        @Index(name = "IDX__T_00_04_13__RESOURCE_TYPE", columnList = "F_04"),
-        @Index(name = "IDX__T_00_04_13__ACTION_TYPE", columnList = "F_05"),
-        @Index(name = "IDX__T_00_04_13__ACTIVE", columnList = "F_07")
+        @Index(name = "IDX__T_00_03_13__RESOURCE_TYPE", columnList = "F_04"),
+        @Index(name = "IDX__T_00_03_13__ACTION_TYPE", columnList = "F_05"),
+        @Index(name = "IDX__T_00_03_13__ACTIVE", columnList = "F_07")
     }
 )
 public class AuditRetentionPolicy extends GenericModel {
@@ -118,7 +118,7 @@ public class AuditRetentionPolicy extends GenericModel {
     @JoinColumn(
         name = "F_04",
         referencedColumnName = "F_00",
-        foreignKey = @ForeignKey(name = "FK__T_00_04_13__RESOURCE_TYPE")
+        foreignKey = @ForeignKey(name = "FK__T_00_03_13__RESOURCE_TYPE")
     )
     private AuditResourceType resourceType;
 
@@ -133,7 +133,7 @@ public class AuditRetentionPolicy extends GenericModel {
     @JoinColumn(
         name = "F_05",
         referencedColumnName = "F_00",
-        foreignKey = @ForeignKey(name = "FK__T_00_04_13__ACTION_TYPE")
+        foreignKey = @ForeignKey(name = "FK__T_00_03_13__ACTION_TYPE")
     )
     private AuditActionType actionType;
 

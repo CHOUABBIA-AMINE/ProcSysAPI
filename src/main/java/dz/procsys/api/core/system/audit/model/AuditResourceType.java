@@ -48,13 +48,13 @@ import lombok.ToString;
 @Builder
 @Entity(name = "AuditResourceType")
 @Table(
-    name = "T_00_04_03",
+    name = "T_00_03_03",
     uniqueConstraints = {
-        @UniqueConstraint(name = "UK__T_00_04_03__CODE", columnNames = {"F_01"})
+        @UniqueConstraint(name = "UK__T_00_03_03__CODE", columnNames = {"F_01"})
     },
     indexes = {
-        @Index(name = "IDX__T_00_04_03__CODE", columnList = "F_01"),
-        @Index(name = "IDX__T_00_04_03__MODULE", columnList = "F_04")
+        @Index(name = "IDX__T_00_03_03__CODE", columnList = "F_01"),
+        @Index(name = "IDX__T_00_03_03__MODULE", columnList = "F_04")
     }
 )
 public class AuditResourceType extends GenericModel {

@@ -49,14 +49,14 @@ import lombok.ToString;
 @Builder
 @Entity(name = "AuditActor")
 @Table(
-    name = "T_00_04_05",
+    name = "T_00_03_05",
     uniqueConstraints = {
-        @UniqueConstraint(name = "UK__T_00_04_05__ACTOR_REF", columnNames = {"F_01", "F_02"})
+        @UniqueConstraint(name = "UK__T_00_03_05__ACTOR_REF", columnNames = {"F_01", "F_02"})
     },
     indexes = {
-        @Index(name = "IDX__T_00_04_05__ACTOR_ID", columnList = "F_01"),
-        @Index(name = "IDX__T_00_04_05__USERNAME", columnList = "F_03"),
-        @Index(name = "IDX__T_00_04_05__SESSION", columnList = "F_06")
+        @Index(name = "IDX__T_00_03_05__ACTOR_ID", columnList = "F_01"),
+        @Index(name = "IDX__T_00_03_05__USERNAME", columnList = "F_03"),
+        @Index(name = "IDX__T_00_03_05__SESSION", columnList = "F_06")
     }
 )
 public class AuditActor extends GenericModel {

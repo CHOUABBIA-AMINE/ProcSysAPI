@@ -56,13 +56,13 @@ import lombok.ToString;
 @Builder
 @Entity(name = "AuditEvent")
 @Table(
-    name = "T_00_04_11",
+    name = "T_00_03_11",
     indexes = {
-        @Index(name = "IDX__T_00_04_11__CORRELATION", columnList = "F_01"),
-        @Index(name = "IDX__T_00_04_11__RECEIVED", columnList = "F_02"),
-        @Index(name = "IDX__T_00_04_11__TYPE", columnList = "F_04"),
-        @Index(name = "IDX__T_00_04_11__STATUS", columnList = "F_05"),
-        @Index(name = "IDX__T_00_04_11__SOURCE", columnList = "F_06")
+        @Index(name = "IDX__T_00_03_11__CORRELATION", columnList = "F_01"),
+        @Index(name = "IDX__T_00_03_11__RECEIVED", columnList = "F_02"),
+        @Index(name = "IDX__T_00_03_11__TYPE", columnList = "F_04"),
+        @Index(name = "IDX__T_00_03_11__STATUS", columnList = "F_05"),
+        @Index(name = "IDX__T_00_03_11__SOURCE", columnList = "F_06")
     }
 )
 public class AuditEvent extends GenericModel {
@@ -116,7 +116,7 @@ public class AuditEvent extends GenericModel {
     @JoinColumn(
         name = "F_04",
         referencedColumnName = "F_00",
-        foreignKey = @ForeignKey(name = "FK__T_00_04_11__EVENT_TYPE"),
+        foreignKey = @ForeignKey(name = "FK__T_00_03_11__EVENT_TYPE"),
         nullable = false
     )
     private AuditEventType eventType;

@@ -58,15 +58,15 @@ import lombok.ToString;
 @Builder
 @Entity(name = "AuditArchive")
 @Table(
-    name = "T_00_04_14",
+    name = "T_00_03_14",
     uniqueConstraints = {
-        @UniqueConstraint(name = "UK__T_00_04_14__ARCHIVE_CODE", columnNames = {"F_01"})
+        @UniqueConstraint(name = "UK__T_00_03_14__ARCHIVE_CODE", columnNames = {"F_01"})
     },
     indexes = {
-        @Index(name = "IDX__T_00_04_14__CODE", columnList = "F_01"),
-        @Index(name = "IDX__T_00_04_14__ARCHIVED_AT", columnList = "F_04"),
-        @Index(name = "IDX__T_00_04_14__STATUS", columnList = "F_08"),
-        @Index(name = "IDX__T_00_04_14__RETENTION", columnList = "F_09")
+        @Index(name = "IDX__T_00_03_14__CODE", columnList = "F_01"),
+        @Index(name = "IDX__T_00_03_14__ARCHIVED_AT", columnList = "F_04"),
+        @Index(name = "IDX__T_00_03_14__STATUS", columnList = "F_08"),
+        @Index(name = "IDX__T_00_03_14__RETENTION", columnList = "F_09")
     }
 )
 public class AuditArchive extends GenericModel {
@@ -183,7 +183,7 @@ public class AuditArchive extends GenericModel {
     @JoinColumn(
         name = "F_09",
         referencedColumnName = "F_00",
-        foreignKey = @ForeignKey(name = "FK__T_00_04_14__RETENTION_POLICY")
+        foreignKey = @ForeignKey(name = "FK__T_00_03_14__RETENTION_POLICY")
     )
     private AuditRetentionPolicy retentionPolicy;
 }

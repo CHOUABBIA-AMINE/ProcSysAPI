@@ -55,15 +55,15 @@ import lombok.ToString;
 @Builder
 @Entity(name = "AuditTrail")
 @Table(
-    name = "T_00_04_12",
+    name = "T_00_03_12",
     uniqueConstraints = {
-        @UniqueConstraint(name = "UK__T_00_04_12__TRAIL_CODE", columnNames = {"F_01"})
+        @UniqueConstraint(name = "UK__T_00_03_12__TRAIL_CODE", columnNames = {"F_01"})
     },
     indexes = {
-        @Index(name = "IDX__T_00_04_12__CODE", columnList = "F_01"),
-        @Index(name = "IDX__T_00_04_12__STATUS", columnList = "F_04"),
-        @Index(name = "IDX__T_00_04_12__MODULE", columnList = "F_05"),
-        @Index(name = "IDX__T_00_04_12__OPENED", columnList = "F_06")
+        @Index(name = "IDX__T_00_03_12__CODE", columnList = "F_01"),
+        @Index(name = "IDX__T_00_03_12__STATUS", columnList = "F_04"),
+        @Index(name = "IDX__T_00_03_12__MODULE", columnList = "F_05"),
+        @Index(name = "IDX__T_00_03_12__OPENED", columnList = "F_06")
     }
 )
 public class AuditTrail extends GenericModel {

@@ -53,11 +53,11 @@ import lombok.ToString;
 @Builder
 @Entity(name = "AuditDiff")
 @Table(
-    name = "T_00_04_09",
+    name = "T_00_03_09",
     indexes = {
-        @Index(name = "IDX__T_00_04_09__RECORD", columnList = "F_01"),
-        @Index(name = "IDX__T_00_04_09__FIELD", columnList = "F_02"),
-        @Index(name = "IDX__T_00_04_09__MASKED", columnList = "F_07")
+        @Index(name = "IDX__T_00_03_09__RECORD", columnList = "F_01"),
+        @Index(name = "IDX__T_00_03_09__FIELD", columnList = "F_02"),
+        @Index(name = "IDX__T_00_03_09__MASKED", columnList = "F_07")
     }
 )
 public class AuditDiff extends GenericModel {
@@ -74,7 +74,7 @@ public class AuditDiff extends GenericModel {
     @JoinColumn(
         name = "F_01",
         referencedColumnName = "F_00",
-        foreignKey = @ForeignKey(name = "FK__T_00_04_09__AUDIT_RECORD"),
+        foreignKey = @ForeignKey(name = "FK__T_00_03_09__AUDIT_RECORD"),
         nullable = false
     )
     private AuditRecord auditRecord;

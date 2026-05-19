@@ -60,14 +60,14 @@ import lombok.ToString;
 @Builder
 @Entity(name = "AuditRecord")
 @Table(
-    name = "T_00_04_10",
+    name = "T_00_03_10",
     indexes = {
-        @Index(name = "IDX__T_00_04_10__CORRELATION", columnList = "F_01"),
-        @Index(name = "IDX__T_00_04_10__TIMESTAMP", columnList = "F_02"),
-        @Index(name = "IDX__T_00_04_10__ACTOR", columnList = "F_07"),
-        @Index(name = "IDX__T_00_04_10__RESOURCE", columnList = "F_08"),
-        @Index(name = "IDX__T_00_04_10__ACTION", columnList = "F_09"),
-        @Index(name = "IDX__T_00_04_10__TRAIL", columnList = "F_11")
+        @Index(name = "IDX__T_00_03_10__CORRELATION", columnList = "F_01"),
+        @Index(name = "IDX__T_00_03_10__TIMESTAMP", columnList = "F_02"),
+        @Index(name = "IDX__T_00_03_10__ACTOR", columnList = "F_07"),
+        @Index(name = "IDX__T_00_03_10__RESOURCE", columnList = "F_08"),
+        @Index(name = "IDX__T_00_03_10__ACTION", columnList = "F_09"),
+        @Index(name = "IDX__T_00_03_10__TRAIL", columnList = "F_11")
     }
 )
 public class AuditRecord extends GenericModel {
@@ -159,7 +159,7 @@ public class AuditRecord extends GenericModel {
     @JoinColumn(
         name = "F_07",
         referencedColumnName = "F_00",
-        foreignKey = @ForeignKey(name = "FK__T_00_04_10__ACTOR"),
+        foreignKey = @ForeignKey(name = "FK__T_00_03_10__ACTOR"),
         nullable = false
     )
     private AuditActor actor;
@@ -176,7 +176,7 @@ public class AuditRecord extends GenericModel {
     @JoinColumn(
         name = "F_08",
         referencedColumnName = "F_00",
-        foreignKey = @ForeignKey(name = "FK__T_00_04_10__RESOURCE"),
+        foreignKey = @ForeignKey(name = "FK__T_00_03_10__RESOURCE"),
         nullable = false
     )
     private AuditResource resource;
@@ -193,7 +193,7 @@ public class AuditRecord extends GenericModel {
     @JoinColumn(
         name = "F_09",
         referencedColumnName = "F_00",
-        foreignKey = @ForeignKey(name = "FK__T_00_04_10__ACTION"),
+        foreignKey = @ForeignKey(name = "FK__T_00_03_10__ACTION"),
         nullable = false
     )
     private AuditAction action;
@@ -209,7 +209,7 @@ public class AuditRecord extends GenericModel {
     @JoinColumn(
         name = "F_10",
         referencedColumnName = "F_00",
-        foreignKey = @ForeignKey(name = "FK__T_00_04_10__CONTEXT")
+        foreignKey = @ForeignKey(name = "FK__T_00_03_10__CONTEXT")
     )
     private AuditContext context;
 
@@ -224,7 +224,7 @@ public class AuditRecord extends GenericModel {
     @JoinColumn(
         name = "F_11",
         referencedColumnName = "F_00",
-        foreignKey = @ForeignKey(name = "FK__T_00_04_10__TRAIL")
+        foreignKey = @ForeignKey(name = "FK__T_00_03_10__TRAIL")
     )
     private AuditTrail auditTrail;
 
@@ -240,7 +240,7 @@ public class AuditRecord extends GenericModel {
     @JoinColumn(
         name = "F_12",
         referencedColumnName = "F_00",
-        foreignKey = @ForeignKey(name = "FK__T_00_04_10__GRANULARITY"),
+        foreignKey = @ForeignKey(name = "FK__T_00_03_10__GRANULARITY"),
         nullable = false
     )
     private AuditGranularityType granularityType;

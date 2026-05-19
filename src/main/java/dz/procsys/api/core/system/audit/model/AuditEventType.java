@@ -49,13 +49,13 @@ import lombok.ToString;
 @Builder
 @Entity(name = "AuditEventType")
 @Table(
-    name = "T_00_04_01",
+    name = "T_00_03_01",
     uniqueConstraints = {
-        @UniqueConstraint(name = "UK__T_00_04_01__CODE", columnNames = {"F_01"})
+        @UniqueConstraint(name = "UK__T_00_03_01__CODE", columnNames = {"F_01"})
     },
     indexes = {
-        @Index(name = "IDX__T_00_04_01__CODE", columnList = "F_01"),
-        @Index(name = "IDX__T_00_04_01__ACTIVE", columnList = "F_02")
+        @Index(name = "IDX__T_00_03_01__CODE", columnList = "F_01"),
+        @Index(name = "IDX__T_00_03_01__ACTIVE", columnList = "F_02")
     }
 )
 public class AuditEventType extends GenericModel {
