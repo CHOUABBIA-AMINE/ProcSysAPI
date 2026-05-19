@@ -1,6 +1,6 @@
 /**
  *	
- *	@Author		: System
+ *	@Author		: CHOUABBIA Amine
  *
  *	@Name		: SettingConstraintRepository
  *	@CreatedOn	: 05-19-2026

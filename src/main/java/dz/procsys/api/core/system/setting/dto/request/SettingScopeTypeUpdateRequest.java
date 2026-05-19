@@ -1,6 +1,6 @@
 /**
  *	
- *	@Author		: System
+ *	@Author		: CHOUABBIA Amine
  *
  *	@Name		: SettingScopeTypeUpdateRequest
  *	@CreatedOn	: 05-19-2026

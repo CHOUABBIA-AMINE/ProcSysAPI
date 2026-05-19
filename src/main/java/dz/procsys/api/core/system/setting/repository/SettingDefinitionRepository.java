@@ -1,6 +1,6 @@
 /**
  *	
- *	@Author		: System
+ *	@Author		: CHOUABBIA Amine
  *
  *	@Name		: SettingDefinitionRepository
  *	@CreatedOn	: 05-19-2026

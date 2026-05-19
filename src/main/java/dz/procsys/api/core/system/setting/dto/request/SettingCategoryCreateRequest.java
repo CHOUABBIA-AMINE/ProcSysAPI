@@ -1,6 +1,6 @@
 /**
  *	
- *	@Author		: System
+ *	@Author		: CHOUABBIA Amine
  *
  *	@Name		: SettingCategoryCreateRequest
  *	@CreatedOn	: 05-19-2026
