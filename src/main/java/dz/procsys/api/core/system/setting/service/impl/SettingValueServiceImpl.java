@@ -27,7 +27,6 @@ import dz.procsys.api.core.system.setting.dto.request.SettingValueCreateRequest;
 import dz.procsys.api.core.system.setting.dto.request.SettingValueUpdateRequest;
 import dz.procsys.api.core.system.setting.dto.response.SettingValueResponse;
 import dz.procsys.api.core.system.setting.mapper.SettingValueMapper;
-import dz.procsys.api.core.system.setting.model.SettingChangeType;
 import dz.procsys.api.core.system.setting.model.SettingDefinition;
 import dz.procsys.api.core.system.setting.model.SettingScopeType;
 import dz.procsys.api.core.system.setting.model.SettingValue;
@@ -35,7 +34,6 @@ import dz.procsys.api.core.system.setting.repository.SettingChangeTypeRepository
 import dz.procsys.api.core.system.setting.repository.SettingDefinitionRepository;
 import dz.procsys.api.core.system.setting.repository.SettingScopeTypeRepository;
 import dz.procsys.api.core.system.setting.repository.SettingValueRepository;
-import dz.procsys.api.core.system.setting.service.SettingHistoryService;
 import dz.procsys.api.core.system.setting.service.SettingValueService;
 
 /**
@@ -52,8 +50,6 @@ public class SettingValueServiceImpl implements SettingValueService {
     private final SettingValueRepository repository;
     private final SettingDefinitionRepository definitionRepository;
     private final SettingScopeTypeRepository scopeTypeRepository;
-    private final SettingChangeTypeRepository changeTypeRepository;
-    private final SettingHistoryService historyService;
     private final SettingValueMapper mapper;
 
     public SettingValueServiceImpl(
@@ -61,13 +57,10 @@ public class SettingValueServiceImpl implements SettingValueService {
             final SettingDefinitionRepository definitionRepository,
             final SettingScopeTypeRepository scopeTypeRepository,
             final SettingChangeTypeRepository changeTypeRepository,
-            final SettingHistoryService historyService,
             final SettingValueMapper mapper) {
         this.repository = repository;
         this.definitionRepository = definitionRepository;
         this.scopeTypeRepository = scopeTypeRepository;
-        this.changeTypeRepository = changeTypeRepository;
-        this.historyService = historyService;
         this.mapper = mapper;
     }
 
@@ -98,13 +91,7 @@ public class SettingValueServiceImpl implements SettingValueService {
         entity.setScopeType(scopeType);
         final SettingValue saved = repository.save(entity);
         log.info("[SettingValueService] SettingValue created with Id: {}", saved.getId());
-        final SettingChangeType createType = changeTypeRepository.findByCode("CREATE")
-            .orElse(null);
-        if (createType != null) {
-            historyService.record(definition, createType,
-                buildScopeRef(scopeType, request.getScopeReferenceId()),
-                null, saved.getValue(), "Initial value creation", saved.getCreatedBy());
-        }
+
         return applyMasking(mapper.toResponse(saved), definition);
     }
 
@@ -120,15 +107,9 @@ public class SettingValueServiceImpl implements SettingValueService {
             throw new IllegalStateException(
                 "SettingDefinition '" + definition.getCode() + "' is immutable.");
         }
-        final String oldValue = entity.getValue();
         mapper.updateEntity(request, entity);
         final SettingValue saved = repository.save(entity);
-        final SettingChangeType updateType = changeTypeRepository.findByCode("UPDATE").orElse(null);
-        if (updateType != null) {
-            historyService.record(definition, updateType,
-                buildScopeRef(entity.getScopeType(), entity.getScopeReferenceId()),
-                oldValue, saved.getValue(), "Value update", saved.getUpdatedBy());
-        }
+
         log.info("[SettingValueService] SettingValue updated with Id: {}", saved.getId());
         return applyMasking(mapper.toResponse(saved), definition);
     }
@@ -188,15 +169,8 @@ public class SettingValueServiceImpl implements SettingValueService {
         log.info("[SettingValueService] Deleting SettingValue with Id: {}", id);
         final SettingValue entity = repository.findById(id)
             .orElseThrow(() -> new IllegalArgumentException("SettingValue not found with Id: " + id));
-        final SettingDefinition definition = entity.getSettingDefinition();
-        final String deletedValue = entity.getValue();
-        final String scopeRef = buildScopeRef(entity.getScopeType(), entity.getScopeReferenceId());
         repository.delete(entity);
-        final SettingChangeType deleteType = changeTypeRepository.findByCode("DELETE").orElse(null);
-        if (deleteType != null) {
-            historyService.record(definition, deleteType, scopeRef,
-                deletedValue, null, "Value deletion", null);
-        }
+
         log.info("[SettingValueService] SettingValue deleted with Id: {}", id);
     }
 
@@ -215,19 +189,5 @@ public class SettingValueServiceImpl implements SettingValueService {
             response.setMasked(Boolean.FALSE);
         }
         return response;
-    }
-
-    /**
-     * Builds a human-readable scope reference string.
-     *
-     * @param scopeType        the scope type entity
-     * @param scopeReferenceId the reference entity ID
-     * @return a descriptive scope reference string
-     */
-    private String buildScopeRef(final SettingScopeType scopeType, final Long scopeReferenceId) {
-        if (scopeReferenceId == null) {
-            return scopeType.getCode();
-        }
-        return scopeType.getCode() + ":" + scopeReferenceId;
     }
 }

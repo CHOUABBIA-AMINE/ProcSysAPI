@@ -24,19 +24,15 @@ import jakarta.persistence.ForeignKey;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
-import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 /**
  * SettingValue Entity - Extends GenericModel.
@@ -45,13 +41,11 @@ import lombok.ToString;
 @Schema(name = "SettingValue", description = "A defined value for a setting under a specific scope (e.g., a user's language setting)")
 @Setter
 @Getter
-@ToString(exclude = {"settingDefinition", "scopeType"})
-@EqualsAndHashCode(callSuper = true, exclude = {"settingDefinition", "scopeType"})
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity(name = "SettingValue")
-@Table(name = "T_00_00_07", uniqueConstraints = {@UniqueConstraint(name = "T_00_00_07_UK_01", columnNames = { "F_09", "F_10", "F_01" })})
+@Table(name = "T_00_00_07", uniqueConstraints = {@UniqueConstraint(name = "T_00_00_07_UK_01", columnNames = { "F_05", "F_06", "F_01" })})
 public class SettingValue extends GenericModel {
     
     @Schema(
@@ -84,25 +78,6 @@ public class SettingValue extends GenericModel {
     )
     @Column(name = "F_04")
     private Date effectiveTo;
-    
-    @Schema(description = "Record creation timestamp", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull
-    @Column(name = "F_05", nullable = false, updatable = false)
-    private Date createdAt;
-
-    @Schema(description = "User who created the record", maxLength = 100)
-    @Size(max = 100)
-    @Column(name = "F_06", length = 100, updatable = false)
-    private String createdBy;
-
-    @Schema(description = "Record last update timestamp")
-    @Column(name = "F_07")
-    private Date updatedAt;
-
-    @Schema(description = "User who last updated the record", maxLength = 100)
-    @Size(max = 100)
-    @Column(name = "F_08", length = 100)
-    private String updatedBy;
 
     @Schema(
         description = "The setting definition this value belongs to",
@@ -111,7 +86,7 @@ public class SettingValue extends GenericModel {
     @NotNull(message = "Setting definition is mandatory")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
-        name = "F_09",
+        name = "F_05",
         referencedColumnName = "F_00",
         foreignKey = @ForeignKey(name = "T_00_00_07_FK_01"),
         nullable = false
@@ -125,7 +100,7 @@ public class SettingValue extends GenericModel {
     @NotNull(message = "Scope type is mandatory")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
-        name = "F_10",
+        name = "F_06",
         referencedColumnName = "F_00",
         foreignKey = @ForeignKey(name = "T_00_00_07_FK_02"),
         nullable = false
@@ -134,16 +109,8 @@ public class SettingValue extends GenericModel {
 
     @PrePersist
     public void prePersist() {
-        if (this.createdAt == null) {
-            this.createdAt = new Date();
-        }
         if (this.effectiveFrom == null) {
             this.effectiveFrom = new Date();
         }
-    }
-
-    @PreUpdate
-    public void preUpdate() {
-        this.updatedAt = new Date();
     }
 }

@@ -13,7 +13,6 @@
 
 package dz.procsys.api.core.system.setting.model;
 
-import java.util.Date;
 import java.util.List;
 
 import dz.procsys.api.platform.kernel.model.GenericModel;
@@ -27,7 +26,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
-import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.NotBlank;
@@ -130,30 +128,11 @@ public class SettingDefinition extends GenericModel {
     @Column(name = "F_08", nullable = false)
     private Boolean isMutable;
 
-    @Schema(description = "Record creation timestamp", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull
-    @Column(name = "F_09", nullable = false, updatable = false)
-    private Date createdAt;
-
-    @Schema(description = "User who created the record", maxLength = 100)
-    @Size(max = 100)
-    @Column(name = "F_10", length = 100, updatable = false)
-    private String createdBy;
-
-    @Schema(description = "Record last update timestamp")
-    @Column(name = "F_11")
-    private Date updatedAt;
-
-    @Schema(description = "User who last updated the record", maxLength = 100)
-    @Size(max = 100)
-    @Column(name = "F_12", length = 100)
-    private String updatedBy;
-
     @Schema(description = "Category this setting belongs to", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "Category is mandatory")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
-        name = "F_13",
+        name = "F_09",
         referencedColumnName = "F_00",
         foreignKey = @ForeignKey(name = "T_00_00_06_FK_01"),
         nullable = false
@@ -164,7 +143,7 @@ public class SettingDefinition extends GenericModel {
     @NotNull(message = "Value Type is mandatory")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
-        name = "F_14",
+        name = "F_10",
         referencedColumnName = "F_00",
         foreignKey = @ForeignKey(name = "T_00_00_06_FK_01"),
         nullable = false
@@ -178,28 +157,12 @@ public class SettingDefinition extends GenericModel {
     @Schema(description = "Specific values defined for scopes", accessMode = Schema.AccessMode.READ_ONLY)
     @OneToMany(mappedBy = "settingDefinition", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SettingValue> values;
-    
-    @Schema(description = "History of changes for this setting", accessMode = Schema.AccessMode.READ_ONLY)
-    @OneToMany(mappedBy = "settingDefinition", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<SettingHistory> history;
-    
-    @Schema(description = "Access policies dictating who can read/write this setting", accessMode = Schema.AccessMode.READ_ONLY)
-    @OneToMany(mappedBy = "settingDefinition", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<SettingAccessPolicy> accessPolicies;
 
     @PrePersist
     public void prePersist() {
-        if (this.createdAt == null) {
-            this.createdAt = new Date();
-        }
         if (this.isEncrypted == null) this.isEncrypted = false;
         if (this.requiresApproval == null) this.requiresApproval = false;
         if (this.isActive == null) this.isActive = true;
         if (this.isMutable == null) this.isMutable = true;
-    }
-
-    @PreUpdate
-    public void preUpdate() {
-        this.updatedAt = new Date();
     }
 }

@@ -13,18 +13,13 @@
 
 package dz.procsys.api.core.system.setting.model;
 
-import java.util.Date;
-
 import dz.procsys.api.platform.kernel.model.GenericModel;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -76,35 +71,4 @@ public class ConstraintType extends GenericModel {
     @Size(max = 100, message = "Validator bean name must not exceed 100 characters")
     @Column(name = "F_03", length = 100)
     private String validatorBean;
-    
-    @Schema(description = "Record creation timestamp", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull
-    @Column(name = "F_04", nullable = false, updatable = false)
-    private Date createdAt;
-
-    @Schema(description = "User who created the record", maxLength = 100)
-    @Size(max = 100)
-    @Column(name = "F_05", length = 100, updatable = false)
-    private String createdBy;
-
-    @Schema(description = "Record last update timestamp")
-    @Column(name = "F_06")
-    private Date updatedAt;
-
-    @Schema(description = "User who last updated the record", maxLength = 100)
-    @Size(max = 100)
-    @Column(name = "F_07", length = 100)
-    private String updatedBy;
-
-    @PrePersist
-    public void prePersist() {
-        if (this.createdAt == null) {
-            this.createdAt = new Date();
-        }
-    }
-
-    @PreUpdate
-    public void preUpdate() {
-        this.updatedAt = new Date();
-    }
 }

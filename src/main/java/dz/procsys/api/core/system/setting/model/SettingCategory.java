@@ -13,7 +13,6 @@
 
 package dz.procsys.api.core.system.setting.model;
 
-import java.util.Date;
 import java.util.List;
 
 import dz.procsys.api.platform.kernel.model.GenericModel;
@@ -27,7 +26,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
-import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.NotBlank;
@@ -97,30 +95,11 @@ public class SettingCategory extends GenericModel {
     @NotNull(message = "Active flag is mandatory")
     @Column(name = "F_04", nullable = false)
     private Boolean isActive;
-        
-    @Schema(description = "Record creation timestamp", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull
-    @Column(name = "F_05", nullable = false, updatable = false)
-    private Date createdAt;
-
-    @Schema(description = "User who created the record", maxLength = 100)
-    @Size(max = 100)
-    @Column(name = "F_06", length = 100, updatable = false)
-    private String createdBy;
-
-    @Schema(description = "Record last update timestamp")
-    @Column(name = "F_07")
-    private Date updatedAt;
-
-    @Schema(description = "User who last updated the record", maxLength = 100)
-    @Size(max = 100)
-    @Column(name = "F_08", length = 100)
-    private String updatedBy;
     
     @Schema(description = "Parent category for hierarchical grouping", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
-        name = "F_09",
+        name = "F_05",
         referencedColumnName = "F_00",
         foreignKey = @ForeignKey(name = "T_00_00_05_FK_01"),
         nullable = false
@@ -137,16 +116,8 @@ public class SettingCategory extends GenericModel {
 
     @PrePersist
     public void prePersist() {
-        if (this.createdAt == null) {
-            this.createdAt = new Date();
-        }
         if (this.isActive == null) {
             this.isActive = true;
         }
-    }
-
-    @PreUpdate
-    public void preUpdate() {
-        this.updatedAt = new Date();
     }
 }
