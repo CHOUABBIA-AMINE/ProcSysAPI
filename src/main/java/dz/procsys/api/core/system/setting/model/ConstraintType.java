@@ -28,11 +28,9 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 /**
  * ConstraintType Entity - Extends GenericModel.
@@ -41,13 +39,11 @@ import lombok.ToString;
 @Schema(name = "ConstraintType", description = "Reference entity describing the type of constraint (e.g., REGEX, RANGE, IN_LIST)")
 @Setter
 @Getter
-@ToString
-@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity(name = "ConstraintType")
-@Table(name = "T_SET_CST_TYP", uniqueConstraints = {@UniqueConstraint(name = "T_SET_CST_TYP_UK_01", columnNames = { "F_CODE" })})
+@Table(name = "T_00_00_01", uniqueConstraints = {@UniqueConstraint(name = "T_00_00_01_UK_01", columnNames = { "F_01" })})
 public class ConstraintType extends GenericModel {
 
     @Schema(

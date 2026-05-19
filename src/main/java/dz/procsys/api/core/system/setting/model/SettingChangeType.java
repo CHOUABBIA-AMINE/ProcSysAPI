@@ -51,12 +51,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 @Entity(name = "SettingChangeType")
-@Table(
-    name = "T_SET_CHG_TYP",
-    uniqueConstraints = {
-        @UniqueConstraint(name = "T_SET_CHG_TYP_UK_01", columnNames = { "F_CODE" })
-    }
-)
+@Table(name = "T_00_00_02", uniqueConstraints = {@UniqueConstraint(name = "T_00_00_02_UK_01", columnNames = { "F_01" })})
 public class SettingChangeType extends GenericModel {
 
     @Schema(

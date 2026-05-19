@@ -22,6 +22,7 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.ForeignKey;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
@@ -34,11 +35,9 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 /**
  * SettingDefinition Entity - Extends GenericModel.
@@ -48,13 +47,11 @@ import lombok.ToString;
 @Schema(name = "SettingDefinition", description = "Aggregate root defining a configuration parameter, its default value, and behaviors")
 @Setter
 @Getter
-@ToString(exclude = {"category", "valueType", "constraints", "values", "history", "accessPolicies"})
-@EqualsAndHashCode(callSuper = true, exclude = {"category", "valueType", "constraints", "values", "history", "accessPolicies"})
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity(name = "SettingDefinition")
-@Table(name = "T_SET_DEFINITION", uniqueConstraints = {@UniqueConstraint(name = "T_SET_DEFINITION_UK_01", columnNames = { "F_CODE" })})
+@Table(name = "T_00_00_06", uniqueConstraints = {@UniqueConstraint(name = "T_00_00_06_UK_01", columnNames = { "F_01" })})
 public class SettingDefinition extends GenericModel {
 
     @Schema(
@@ -158,7 +155,7 @@ public class SettingDefinition extends GenericModel {
     @JoinColumn(
         name = "F_13",
         referencedColumnName = "F_00",
-        //foreignKey = @ForeignKey(name = "T_02_04_04_FK_01"),
+        foreignKey = @ForeignKey(name = "T_00_00_06_FK_01"),
         nullable = false
     )
     private SettingCategory category;
@@ -169,7 +166,7 @@ public class SettingDefinition extends GenericModel {
     @JoinColumn(
         name = "F_14",
         referencedColumnName = "F_00",
-        //foreignKey = @ForeignKey(name = "T_02_04_04_FK_01"),
+        foreignKey = @ForeignKey(name = "T_00_00_06_FK_01"),
         nullable = false
     )
     private SettingValueType valueType;

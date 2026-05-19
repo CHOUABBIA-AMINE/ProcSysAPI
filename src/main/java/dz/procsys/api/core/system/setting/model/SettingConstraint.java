@@ -20,6 +20,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.ForeignKey;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
@@ -50,7 +51,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 @Entity(name = "SettingConstraint")
-@Table(name = "T_SET_CONSTRAINT", uniqueConstraints = {@UniqueConstraint(name = "T_SET_CONSTRAINT_UK_01", columnNames = { "F_DEFINITION_ID", "F_CONSTRAINT_TYPE_ID" })})
+@Table(name = "T_00_00_08", uniqueConstraints = {@UniqueConstraint(name = "T_00_00_08_UK_01", columnNames = { "F_07", "F_08" })})
 public class SettingConstraint extends GenericModel {
 
     @Schema(
@@ -103,7 +104,7 @@ public class SettingConstraint extends GenericModel {
     @JoinColumn(
         name = "F_07",
         referencedColumnName = "F_00",
-        //foreignKey = @ForeignKey(name = "T_02_04_04_FK_01"),
+        foreignKey = @ForeignKey(name = "T_00_00_08_FK_01"),
         nullable = false
     )
     private SettingDefinition settingDefinition;
@@ -118,7 +119,7 @@ public class SettingConstraint extends GenericModel {
     @JoinColumn(
         name = "F_08",
         referencedColumnName = "F_00",
-        //foreignKey = @ForeignKey(name = "T_02_04_04_FK_01"),
+        foreignKey = @ForeignKey(name = "T_00_00_08_FK_01"),
         nullable = false
     )
     private ConstraintType constraintType;

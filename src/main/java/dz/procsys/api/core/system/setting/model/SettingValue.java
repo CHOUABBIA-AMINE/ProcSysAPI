@@ -20,6 +20,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.ForeignKey;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
@@ -50,7 +51,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 @Entity(name = "SettingValue")
-@Table(name = "T_00_00_11", uniqueConstraints = {@UniqueConstraint(name = "T_00_00_11_UK_01", columnNames = { "F_DEFINITION_ID", "F_SCOPE_TYPE_ID", "F_SCOPE_REF_ID" })})
+@Table(name = "T_00_00_07", uniqueConstraints = {@UniqueConstraint(name = "T_00_00_07_UK_01", columnNames = { "F_09", "F_10", "F_01" })})
 public class SettingValue extends GenericModel {
     
     @Schema(
@@ -112,7 +113,7 @@ public class SettingValue extends GenericModel {
     @JoinColumn(
         name = "F_09",
         referencedColumnName = "F_00",
-        //foreignKey = @ForeignKey(name = "T_02_04_04_FK_01"),
+        foreignKey = @ForeignKey(name = "T_00_00_07_FK_01"),
         nullable = false
     )
     private SettingDefinition settingDefinition;
@@ -126,7 +127,7 @@ public class SettingValue extends GenericModel {
     @JoinColumn(
         name = "F_10",
         referencedColumnName = "F_00",
-        //foreignKey = @ForeignKey(name = "T_02_04_04_FK_01"),
+        foreignKey = @ForeignKey(name = "T_00_00_07_FK_02"),
         nullable = false
     )
     private SettingScopeType scopeType;

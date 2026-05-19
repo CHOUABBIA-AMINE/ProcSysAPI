@@ -28,11 +28,9 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 /**
  * SettingScopeType Entity - Extends GenericModel.
@@ -42,15 +40,13 @@ import lombok.ToString;
 @Schema(name = "SettingScopeType", description = "Reference entity describing the scope level of a setting (e.g., GLOBAL, ORGANIZATION, DEPARTMENT, USER)")
 @Setter
 @Getter
-@ToString
-@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity(name = "SettingScopeType")
-@Table(name = "T_SET_SCO_TYP", uniqueConstraints = {
-        	@UniqueConstraint(name = "T_SET_SCO_TYP_UK_01", columnNames = { "F_CODE" }),
-        	@UniqueConstraint(name = "T_SET_SCO_TYP_UK_02", columnNames = { "F_PRIORITY" })})
+@Table(name = "T_00_00_03", uniqueConstraints = {
+        	@UniqueConstraint(name = "T_00_00_03_UK_01", columnNames = { "F_01" }),
+        	@UniqueConstraint(name = "T_00_00_03_UK_02", columnNames = { "F_02" })})
 public class SettingScopeType extends GenericModel {
 
     @Schema(

@@ -20,6 +20,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.ForeignKey;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
@@ -29,11 +30,9 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 /**
  * SettingHistory Entity - Extends GenericModel.
@@ -42,13 +41,11 @@ import lombok.ToString;
 @Schema(name = "SettingHistory", description = "Audit trail record capturing previous values of a setting")
 @Setter
 @Getter
-@ToString(exclude = {"settingDefinition", "changeType"})
-@EqualsAndHashCode(callSuper = true, exclude = {"settingDefinition", "changeType"})
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity(name = "SettingHistory")
-@Table(name = "T_SET_HISTORY")
+@Table(name = "T_00_00_09")
 public class SettingHistory extends GenericModel {
     
     @Schema(
@@ -105,7 +102,7 @@ public class SettingHistory extends GenericModel {
     @JoinColumn(
         name = "F_07",
         referencedColumnName = "F_00",
-        //foreignKey = @ForeignKey(name = "T_02_04_04_FK_01"),
+        foreignKey = @ForeignKey(name = "T_00_00_09_FK_01"),
         nullable = false
     )
     private SettingDefinition settingDefinition;
@@ -119,7 +116,7 @@ public class SettingHistory extends GenericModel {
     @JoinColumn(
         name = "F_08",
         referencedColumnName = "F_00",
-        //foreignKey = @ForeignKey(name = "T_02_04_04_FK_01"),
+        foreignKey = @ForeignKey(name = "T_00_00_09_FK_01"),
         nullable = false
     )
     private SettingChangeType changeType;

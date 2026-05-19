@@ -20,6 +20,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.ForeignKey;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
@@ -52,7 +53,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 @Entity(name = "SettingChangeRequest")
-@Table(name = "T_SET_CHG_REQ")
+@Table(name = "T_00_00_10")
 public class SettingChangeRequest extends GenericModel {
 
     @Schema(
@@ -137,7 +138,7 @@ public class SettingChangeRequest extends GenericModel {
     @JoinColumn(
         name = "F_12",
         referencedColumnName = "F_00",
-        //foreignKey = @ForeignKey(name = "T_02_04_04_FK_01"),
+        foreignKey = @ForeignKey(name = "T_00_00_10_FK_01"),
         nullable = false
     )
     private SettingDefinition settingDefinition;
@@ -151,7 +152,7 @@ public class SettingChangeRequest extends GenericModel {
     @JoinColumn(
         name = "F_13",
         referencedColumnName = "F_00",
-        //foreignKey = @ForeignKey(name = "T_02_04_04_FK_01"),
+        foreignKey = @ForeignKey(name = "T_00_00_10_FK_01"),
         nullable = false
     )
     private SettingChangeType changeType;

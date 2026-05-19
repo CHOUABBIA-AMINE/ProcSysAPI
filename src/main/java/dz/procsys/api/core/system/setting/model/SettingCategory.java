@@ -22,6 +22,7 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.ForeignKey;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
@@ -53,7 +54,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 @Entity(name = "SettingCategory")
-@Table(name = "T_SET_CATEGORY", uniqueConstraints = {@UniqueConstraint(name = "T_SET_CATEGORY_UK_01", columnNames = { "F_CODE" })})
+@Table(name = "T_00_00_05", uniqueConstraints = {@UniqueConstraint(name = "T_00_00_05_UK_01", columnNames = { "F_01" })})
 public class SettingCategory extends GenericModel {
 
     @Schema(
@@ -121,7 +122,7 @@ public class SettingCategory extends GenericModel {
     @JoinColumn(
         name = "F_09",
         referencedColumnName = "F_00",
-        //foreignKey = @ForeignKey(name = "T_02_04_04_FK_01"),
+        foreignKey = @ForeignKey(name = "T_00_00_05_FK_01"),
         nullable = false
     )
     private SettingCategory parentCategory;
