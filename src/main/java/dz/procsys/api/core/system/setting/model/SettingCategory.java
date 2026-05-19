@@ -25,7 +25,6 @@ import jakarta.persistence.ForeignKey;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.NotBlank;
@@ -33,11 +32,9 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 /**
  * SettingCategory Entity - Extends GenericModel.
@@ -46,13 +43,11 @@ import lombok.ToString;
 @Schema(name = "SettingCategory", description = "Logical grouping or hierarchical category of settings")
 @Setter
 @Getter
-@ToString(exclude = {"parentCategory", "subCategories", "settings"})
-@EqualsAndHashCode(callSuper = true, exclude = {"parentCategory", "subCategories", "settings"})
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity(name = "SettingCategory")
-@Table(name = "T_00_00_05", uniqueConstraints = {@UniqueConstraint(name = "T_00_00_05_UK_01", columnNames = { "F_01" })})
+@Table(name = "T_00_00_04", uniqueConstraints = {@UniqueConstraint(name = "T_00_00_04_UK_01", columnNames = { "F_01" })})
 public class SettingCategory extends GenericModel {
 
     @Schema(
@@ -101,8 +96,8 @@ public class SettingCategory extends GenericModel {
     @JoinColumn(
         name = "F_05",
         referencedColumnName = "F_00",
-        foreignKey = @ForeignKey(name = "T_00_00_05_FK_01"),
-        nullable = false
+        foreignKey = @ForeignKey(name = "T_00_00_04_FK_01"),
+        nullable = true
     )
     private SettingCategory parentCategory;
 
@@ -113,11 +108,4 @@ public class SettingCategory extends GenericModel {
     @Schema(description = "Settings within this category", accessMode = Schema.AccessMode.READ_ONLY)
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     private List<SettingDefinition> settings;
-
-    @PrePersist
-    public void prePersist() {
-        if (this.isActive == null) {
-            this.isActive = true;
-        }
-    }
 }

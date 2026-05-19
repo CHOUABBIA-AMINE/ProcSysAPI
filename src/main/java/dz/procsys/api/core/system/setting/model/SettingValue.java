@@ -13,7 +13,7 @@
 
 package dz.procsys.api.core.system.setting.model;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import dz.procsys.api.platform.kernel.model.GenericModel;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -23,7 +23,6 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.NotBlank;
@@ -70,14 +69,14 @@ public class SettingValue extends GenericModel {
         requiredMode = Schema.RequiredMode.NOT_REQUIRED
     )
     @Column(name = "F_03")
-    private Date effectiveFrom;
+    private LocalDateTime effectiveFrom;
     
     @Schema(
         description = "Effective end date for this value (null means indefinite)",
         requiredMode = Schema.RequiredMode.NOT_REQUIRED
     )
     @Column(name = "F_04")
-    private Date effectiveTo;
+    private LocalDateTime effectiveTo;
 
     @Schema(
         description = "The setting definition this value belongs to",
@@ -106,11 +105,4 @@ public class SettingValue extends GenericModel {
         nullable = false
     )
     private SettingScopeType scopeType;
-
-    @PrePersist
-    public void prePersist() {
-        if (this.effectiveFrom == null) {
-            this.effectiveFrom = new Date();
-        }
-    }
 }

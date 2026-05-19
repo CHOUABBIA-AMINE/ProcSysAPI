@@ -28,11 +28,9 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 /**
  * SettingConstraint Entity - Extends GenericModel.
@@ -41,13 +39,11 @@ import lombok.ToString;
 @Schema(name = "SettingConstraint", description = "A validation constraint applied to a setting definition")
 @Setter
 @Getter
-@ToString(exclude = {"settingDefinition", "constraintType"})
-@EqualsAndHashCode(callSuper = true, exclude = {"settingDefinition", "constraintType"})
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity(name = "SettingConstraint")
-@Table(name = "T_00_00_08", uniqueConstraints = {@UniqueConstraint(name = "T_00_00_08_UK_01", columnNames = { "F_07", "F_08" })})
+@Table(name = "T_00_00_06", uniqueConstraints = {@UniqueConstraint(name = "T_00_00_06_UK_01", columnNames = { "F_03", "F_04" })})
 public class SettingConstraint extends GenericModel {
 
     @Schema(
@@ -77,11 +73,10 @@ public class SettingConstraint extends GenericModel {
     )
     @NotNull(message = "Setting definition is mandatory")
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "F_DEFINITION_ID", nullable = false)
     @JoinColumn(
         name = "F_03",
         referencedColumnName = "F_00",
-        foreignKey = @ForeignKey(name = "T_00_00_08_FK_01"),
+        foreignKey = @ForeignKey(name = "T_00_00_06_FK_01"),
         nullable = false
     )
     private SettingDefinition settingDefinition;
@@ -92,11 +87,10 @@ public class SettingConstraint extends GenericModel {
     )
     @NotNull(message = "Constraint type is mandatory")
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "F_CONSTRAINT_TYPE_ID", nullable = false)
     @JoinColumn(
         name = "F_04",
         referencedColumnName = "F_00",
-        foreignKey = @ForeignKey(name = "T_00_00_08_FK_01"),
+        foreignKey = @ForeignKey(name = "T_00_00_06_FK_02"),
         nullable = false
     )
     private ConstraintType constraintType;

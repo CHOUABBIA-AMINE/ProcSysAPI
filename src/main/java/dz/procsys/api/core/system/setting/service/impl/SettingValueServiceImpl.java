@@ -30,7 +30,6 @@ import dz.procsys.api.core.system.setting.mapper.SettingValueMapper;
 import dz.procsys.api.core.system.setting.model.SettingDefinition;
 import dz.procsys.api.core.system.setting.model.SettingScopeType;
 import dz.procsys.api.core.system.setting.model.SettingValue;
-import dz.procsys.api.core.system.setting.repository.SettingChangeTypeRepository;
 import dz.procsys.api.core.system.setting.repository.SettingDefinitionRepository;
 import dz.procsys.api.core.system.setting.repository.SettingScopeTypeRepository;
 import dz.procsys.api.core.system.setting.repository.SettingValueRepository;
@@ -56,7 +55,6 @@ public class SettingValueServiceImpl implements SettingValueService {
             final SettingValueRepository repository,
             final SettingDefinitionRepository definitionRepository,
             final SettingScopeTypeRepository scopeTypeRepository,
-            final SettingChangeTypeRepository changeTypeRepository,
             final SettingValueMapper mapper) {
         this.repository = repository;
         this.definitionRepository = definitionRepository;
