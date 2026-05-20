@@ -44,7 +44,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "ArchiveBox")
-@Table(name = "T_01_01_06", uniqueConstraints = {@UniqueConstraint(name = "T_01_01_06_UK_01", columnNames = { "F_01" })})
+@Table(name = "T_01_05_01", uniqueConstraints = {@UniqueConstraint(name = "T_01_05_01_UK_01", columnNames = { "F_01" })})
 public class ArchiveBox extends GenericModel {
 
     /**
@@ -79,6 +79,6 @@ public class ArchiveBox extends GenericModel {
     )
     @NotNull(message = "Shelf is mandatory for archive box placement")
     @ManyToOne
-    @JoinColumn(name = "F_03", referencedColumnName = "F_00", foreignKey = @ForeignKey(name = "T_01_01_06_FK_01"), nullable = false)
+    @JoinColumn(name = "F_03", referencedColumnName = "F_00", foreignKey = @ForeignKey(name = "T_01_05_01_FK_01"), nullable = false)
     private Shelf shelf;
 }

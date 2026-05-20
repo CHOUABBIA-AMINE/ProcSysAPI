@@ -45,7 +45,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "Room")
-@Table(name = "T_01_01_03", uniqueConstraints = {@UniqueConstraint(name = "T_01_01_03_UK_01", columnNames = { "F_05", "F_04" })})
+@Table(name = "T_01_01_02", uniqueConstraints = {@UniqueConstraint(name = "T_01_01_02_UK_01", columnNames = { "F_05", "F_04" })})
 public class Room extends GenericModel {
 
     /**
@@ -71,6 +71,6 @@ public class Room extends GenericModel {
     )
     @NotNull(message = "Building is mandatory for room placement")
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "F_02", referencedColumnName = "F_00", foreignKey = @ForeignKey(name = "T_01_01_03_FK_01"), nullable = false)
+    @JoinColumn(name = "F_02", referencedColumnName = "F_00", foreignKey = @ForeignKey(name = "T_01_01_02_FK_01"), nullable = false)
     private Building building;
 }

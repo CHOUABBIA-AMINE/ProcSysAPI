@@ -49,7 +49,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "ArchiveFolder")
-@Table(name = "T_01_01_07", uniqueConstraints = {@UniqueConstraint(name = "T_01_01_07_UK_01", columnNames = { "F_01" })})
+@Table(name = "T_01_05_02", uniqueConstraints = {@UniqueConstraint(name = "T_01_05_02_UK_01", columnNames = { "F_01" })})
 public class ArchiveFolder extends GenericModel {
 
     /**
@@ -84,12 +84,7 @@ public class ArchiveFolder extends GenericModel {
     )
     @NotNull(message = "Archive box is mandatory for folder placement")
     @ManyToOne
-    @JoinColumn(
-        name = "F_03",
-        referencedColumnName = "F_00",
-        foreignKey = @ForeignKey(name = "T_01_01_07_FK_01"),
-        nullable = false
-    )
+    @JoinColumn(name = "F_03", referencedColumnName = "F_00", foreignKey = @ForeignKey(name = "T_01_05_02_FK_01"), nullable = false)
     private ArchiveBox archiveBox;
 
     /**
@@ -101,10 +96,10 @@ public class ArchiveFolder extends GenericModel {
     )
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-        name = "R_T010107_T010203",
-        joinColumns = @JoinColumn(name = "F_01", referencedColumnName = "F_00", foreignKey = @ForeignKey(name = "R_T010107_T010203_FK_01")),
-        inverseJoinColumns = @JoinColumn(name = "F_02", referencedColumnName = "F_00", foreignKey = @ForeignKey(name = "R_T010107_T010203_FK_02")),
-        uniqueConstraints = @UniqueConstraint(name = "R_T010107_T010203_UK_01", columnNames = { "F_01", "F_02" })
+        name = "R_T010502_T010203",
+        joinColumns = @JoinColumn(name = "F_01", referencedColumnName = "F_00", foreignKey = @ForeignKey(name = "R_T010502_T010203_FK_01")),
+        inverseJoinColumns = @JoinColumn(name = "F_02", referencedColumnName = "F_00", foreignKey = @ForeignKey(name = "R_T010502_T010203_FK_02")),
+        uniqueConstraints = @UniqueConstraint(name = "R_T010502_T010203_UK_01", columnNames = { "F_01", "F_02" })
     )
     private List<Mail> mails;
 
@@ -117,10 +112,10 @@ public class ArchiveFolder extends GenericModel {
     )
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-        name = "R_T010107_T010302",
-        joinColumns = @JoinColumn(name = "F_01", referencedColumnName = "F_00", foreignKey = @ForeignKey(name = "R_T010107_T010302_FK_01")),
-        inverseJoinColumns = @JoinColumn(name = "F_02", referencedColumnName = "F_00", foreignKey = @ForeignKey(name = "R_T010107_T010302_FK_02")),
-        uniqueConstraints = @UniqueConstraint(name = "R_T010107_T010302_UK_01",columnNames = { "F_01", "F_02" })
+        name = "R_T010502_T010302",
+        joinColumns = @JoinColumn(name = "F_01", referencedColumnName = "F_00", foreignKey = @ForeignKey(name = "R_T010502_T010302_FK_01")),
+        inverseJoinColumns = @JoinColumn(name = "F_02", referencedColumnName = "F_00", foreignKey = @ForeignKey(name = "R_T010502_T010302_FK_02")),
+        uniqueConstraints = @UniqueConstraint(name = "R_T010502_T010302_UK_01",columnNames = { "F_01", "F_02" })
     )
     private List<Document> documents;
 }

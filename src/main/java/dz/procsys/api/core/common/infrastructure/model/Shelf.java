@@ -46,7 +46,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "Shelf")
-@Table(name = "T_01_01_04", uniqueConstraints = {@UniqueConstraint(name = "T_01_01_04_UK_01", columnNames = { "F_01" })})
+@Table(name = "T_01_01_03", uniqueConstraints = {@UniqueConstraint(name = "T_01_01_03_UK_01", columnNames = { "F_01" })})
 public class Shelf extends GenericModel {
 
     /**
@@ -72,6 +72,6 @@ public class Shelf extends GenericModel {
     )
     @NotNull(message = "Room is mandatory for shelf placement")
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "F_02", referencedColumnName = "F_00", foreignKey = @ForeignKey(name = "T_01_01_04_FK_01"), nullable = false)
+    @JoinColumn(name = "F_02", referencedColumnName = "F_00", foreignKey = @ForeignKey(name = "T_01_01_03_FK_01"), nullable = false)
     private Room room;
 }
