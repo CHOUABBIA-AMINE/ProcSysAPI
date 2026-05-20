@@ -17,6 +17,7 @@ import dz.procsys.api.platform.kernel.model.GenericModel;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Index;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.NotBlank;
@@ -40,9 +41,11 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 @Entity(name = "SettingScopeType")
-@Table(name = "T_00_00_03", uniqueConstraints = {
-        	@UniqueConstraint(name = "T_00_00_03_UK_01", columnNames = { "F_01" }),
-        	@UniqueConstraint(name = "T_00_00_03_UK_02", columnNames = { "F_02" })})
+@Table(name = "T_00_00_03",
+    uniqueConstraints = {
+            @UniqueConstraint(name = "UK_T_00_00_03_01", columnNames = { "F_01" }),
+            @UniqueConstraint(name = "UK_T_00_00_03_02", columnNames = { "F_02" })},
+    indexes = {@Index(name = "IDX_T_00_00_03_CODE", columnList = "F_01")})
 public class SettingScopeType extends GenericModel {
 
     @Schema(

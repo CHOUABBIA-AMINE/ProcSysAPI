@@ -25,6 +25,7 @@ import jakarta.persistence.ForeignKey;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Index;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.NotBlank;
@@ -47,7 +48,12 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 @Entity(name = "SettingCategory")
-@Table(name = "T_00_00_04", uniqueConstraints = {@UniqueConstraint(name = "T_00_00_04_UK_01", columnNames = { "F_01" })})
+@Table(name = "T_00_00_04",
+    uniqueConstraints = {@UniqueConstraint(name = "UK_T_00_00_04_01", columnNames = { "F_01" })},
+    indexes = {
+        @Index(name = "IDX_T_00_00_04_CODE", columnList = "F_01"),
+        @Index(name = "IDX_T_00_00_04_PARENT", columnList = "F_05")
+    })
 public class SettingCategory extends GenericModel {
 
     @Schema(
@@ -96,7 +102,7 @@ public class SettingCategory extends GenericModel {
     @JoinColumn(
         name = "F_05",
         referencedColumnName = "F_00",
-        foreignKey = @ForeignKey(name = "T_00_00_04_FK_01"),
+        foreignKey = @ForeignKey(name = "FK_T_00_00_04_01"),
         nullable = true
     )
     private SettingCategory parentCategory;

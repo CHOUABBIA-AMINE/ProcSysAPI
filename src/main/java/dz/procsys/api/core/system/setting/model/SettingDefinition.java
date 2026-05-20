@@ -25,6 +25,7 @@ import jakarta.persistence.ForeignKey;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Index;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.NotBlank;
@@ -48,7 +49,13 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 @Entity(name = "SettingDefinition")
-@Table(name = "T_00_00_05", uniqueConstraints = {@UniqueConstraint(name = "T_00_00_05_UK_01", columnNames = { "F_01" })})
+@Table(name = "T_00_00_05",
+    uniqueConstraints = {@UniqueConstraint(name = "UK_T_00_00_05_01", columnNames = { "F_01" })},
+    indexes = {
+        @Index(name = "IDX_T_00_00_05_CODE", columnList = "F_01"),
+        @Index(name = "IDX_T_00_00_05_CATEGORY", columnList = "F_08"),
+        @Index(name = "IDX_T_00_00_05_VALUE_TYPE", columnList = "F_09")
+    })
 public class SettingDefinition extends GenericModel {
 
     @Schema(
@@ -124,7 +131,7 @@ public class SettingDefinition extends GenericModel {
     @JoinColumn(
         name = "F_08",
         referencedColumnName = "F_00",
-        foreignKey = @ForeignKey(name = "T_00_00_05_FK_01"),
+        foreignKey = @ForeignKey(name = "FK_T_00_00_05_01"),
         nullable = false
     )
     private SettingCategory category;
@@ -135,7 +142,7 @@ public class SettingDefinition extends GenericModel {
     @JoinColumn(
         name = "F_09",
         referencedColumnName = "F_00",
-        foreignKey = @ForeignKey(name = "T_00_00_05_FK_02"),
+        foreignKey = @ForeignKey(name = "FK_T_00_00_05_02"),
         nullable = false
     )
     private SettingValueType valueType;

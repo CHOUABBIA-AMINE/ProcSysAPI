@@ -23,6 +23,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Index;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.NotBlank;
@@ -44,7 +45,13 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 @Entity(name = "SettingValue")
-@Table(name = "T_00_00_07", uniqueConstraints = {@UniqueConstraint(name = "T_00_00_07_UK_01", columnNames = { "F_05", "F_06", "F_01" })})
+@Table(name = "T_00_00_07",
+    uniqueConstraints = {@UniqueConstraint(name = "UK_T_00_00_07_01", columnNames = { "F_05", "F_06", "F_01" })},
+    indexes = {
+        @Index(name = "IDX_T_00_00_07_SETTING_DEF", columnList = "F_05"),
+        @Index(name = "IDX_T_00_00_07_SCOPE_TYPE", columnList = "F_06"),
+        @Index(name = "IDX_T_00_00_07_SCOPE_REF", columnList = "F_01")
+    })
 public class SettingValue extends GenericModel {
     
     @Schema(
@@ -87,7 +94,7 @@ public class SettingValue extends GenericModel {
     @JoinColumn(
         name = "F_05",
         referencedColumnName = "F_00",
-        foreignKey = @ForeignKey(name = "T_00_00_07_FK_01"),
+        foreignKey = @ForeignKey(name = "FK_T_00_00_07_01"),
         nullable = false
     )
     private SettingDefinition settingDefinition;
@@ -101,7 +108,7 @@ public class SettingValue extends GenericModel {
     @JoinColumn(
         name = "F_06",
         referencedColumnName = "F_00",
-        foreignKey = @ForeignKey(name = "T_00_00_07_FK_02"),
+        foreignKey = @ForeignKey(name = "FK_T_00_00_07_02"),
         nullable = false
     )
     private SettingScopeType scopeType;
