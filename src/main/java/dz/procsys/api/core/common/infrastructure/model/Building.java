@@ -1,14 +1,14 @@
 /**
- *	
- *	@author		: CHOUABBIA Amine
  *
- *	@Name		: Building
- *	@CreatedOn	: 06-26-2025
- *	@Updated	: 12-11-2025
+ *  @author     : CHOUABBIA Amine
  *
- *	@Type		: Class
- *	@Layer		: Model
- *	@Package	: Common / Infrastructure
+ *  @Name       : Building
+ *  @CreatedOn  : 06-26-2025
+ *  @Updated    : 12-11-2025
+ *
+ *  @Type       : Class
+ *  @Layer      : Model
+ *  @Package    : Common / Infrastructure
  *
  **/
 
@@ -28,47 +28,61 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * Building Entity - Extends GenericModel
- * Represents building blocks with multilingual designations
+ * Building Entity - Extends GenericModel.
+ * Represents a physical building in the organization infrastructure,
+ * with multilingual designations (Arabic, English, French).
  */
+@Schema(
+    name = "Building",
+    description = "Represents a physical building in the organization infrastructure with multilingual designations."
+)
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name="Building")
-@Table(name="T_01_01_01", uniqueConstraints = { @UniqueConstraint(name = "T_01_01_01_UK_01", columnNames = { "F_03" })})
+@Entity(name = "Building")
+@Table(name = "T_01_01_01", uniqueConstraints = {@UniqueConstraint( name = "T_01_01_01_UK_01", columnNames = { "F_03" })})
 public class Building extends GenericModel {
-	
-	@Schema(
-        description = "Execution status of the action",
-        example = "Building A",
-        requiredMode = Schema.RequiredMode.NOT_REQUIRED,
-        maxLength = 100
-    )
-    @NotBlank(message = "Status is mandatory")
-    @Size(max = 100, message = "Status must not exceed 100 characters")
-    @Column(name = "F_01", length = 100, nullable = true)
-	private String designationAr;
 
-	@Schema(
-        description = "Execution status of the action",
-        example = "Building A",
-        requiredMode = Schema.RequiredMode.NOT_REQUIRED,
-        maxLength = 100
-    )
-    @NotBlank(message = "Status is mandatory")
-    @Size(max = 100, message = "Status must not exceed 100 characters")
-    @Column(name = "F_02", length = 100, nullable = true)
-	private String designationEn;
-	
-	@Schema(
-        description = "Execution status of the action",
-        example = "Bloc A",
+    /**
+     * Building designation in Arabic.
+     */
+    @Schema(
+        description = "Building designation in Arabic",
         requiredMode = Schema.RequiredMode.REQUIRED,
+        example = "المبنى أ",
         maxLength = 100
     )
-    @NotBlank(message = "Status is mandatory")
-    @Size(max = 100, message = "Status must not exceed 100 characters")
+    @NotBlank(message = "Arabic designation is mandatory")
+    @Size(max = 100, message = "Arabic designation must not exceed 100 characters")
+    @Column(name = "F_01", length = 100, nullable = false)
+    private String designationAr;
+
+    /**
+     * Building designation in English.
+     */
+    @Schema(
+        description = "Building designation in English",
+        requiredMode = Schema.RequiredMode.REQUIRED,
+        example = "Building A",
+        maxLength = 100
+    )
+    @NotBlank(message = "English designation is mandatory")
+    @Size(max = 100, message = "English designation must not exceed 100 characters")
+    @Column(name = "F_02", length = 100, nullable = false)
+    private String designationEn;
+
+    /**
+     * Building designation in French (used as unique business key). 
+     */
+    @Schema(
+        description = "Building designation in French (unique business key)",
+        requiredMode = Schema.RequiredMode.REQUIRED,
+        example = "Bloc A",
+        maxLength = 100
+    )
+    @NotBlank(message = "French designation is mandatory")
+    @Size(max = 100, message = "French designation must not exceed 100 characters")
     @Column(name = "F_03", length = 100, nullable = false)
-	private String designationFr;
+    private String designationFr;
 }
