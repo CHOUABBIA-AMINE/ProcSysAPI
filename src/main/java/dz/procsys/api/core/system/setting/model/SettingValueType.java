@@ -17,6 +17,7 @@ import dz.procsys.api.platform.kernel.model.GenericModel;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Index;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.NotBlank;
@@ -40,7 +41,9 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 @Entity(name = "SettingValueType")
-@Table(name = "T_00_00_02", uniqueConstraints = {@UniqueConstraint(name = "T_00_00_02_UK_01", columnNames = { "F_01" })})
+@Table(name = "T_00_00_02",
+    uniqueConstraints = {@UniqueConstraint(name = "UK_T_00_00_02_01", columnNames = { "F_01" })},
+    indexes = {@Index(name = "IDX_T_00_00_02_CODE", columnList = "F_01")})
 public class SettingValueType extends GenericModel {
 
     @Schema(

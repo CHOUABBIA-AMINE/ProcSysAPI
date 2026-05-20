@@ -21,6 +21,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Index;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.NotBlank;
@@ -43,7 +44,12 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 @Entity(name = "SettingConstraint")
-@Table(name = "T_00_00_06", uniqueConstraints = {@UniqueConstraint(name = "T_00_00_06_UK_01", columnNames = { "F_03", "F_04" })})
+@Table(name = "T_00_00_06",
+    uniqueConstraints = {@UniqueConstraint(name = "UK_T_00_00_06_01", columnNames = { "F_03", "F_04" })},
+    indexes = {
+        @Index(name = "IDX_T_00_00_06_SETTING_DEF", columnList = "F_03"),
+        @Index(name = "IDX_T_00_00_06_CONSTRAINT", columnList = "F_04")
+    })
 public class SettingConstraint extends GenericModel {
 
     @Schema(
@@ -76,7 +82,7 @@ public class SettingConstraint extends GenericModel {
     @JoinColumn(
         name = "F_03",
         referencedColumnName = "F_00",
-        foreignKey = @ForeignKey(name = "T_00_00_06_FK_01"),
+        foreignKey = @ForeignKey(name = "FK_T_00_00_06_01"),
         nullable = false
     )
     private SettingDefinition settingDefinition;
@@ -90,7 +96,7 @@ public class SettingConstraint extends GenericModel {
     @JoinColumn(
         name = "F_04",
         referencedColumnName = "F_00",
-        foreignKey = @ForeignKey(name = "T_00_00_06_FK_02"),
+        foreignKey = @ForeignKey(name = "FK_T_00_00_06_02"),
         nullable = false
     )
     private ConstraintType constraintType;
