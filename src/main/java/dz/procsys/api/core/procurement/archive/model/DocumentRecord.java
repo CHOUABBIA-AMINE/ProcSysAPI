@@ -9,6 +9,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Index;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.NotNull;
@@ -27,7 +28,13 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "DocumentRecord")
-@Table(name = "T_01_01_09")
+@Table(name = "T_01_01_09", indexes = {
+    @Index(name = "T_01_01_09_IX_01", columnList = "F_04"),
+    @Index(name = "T_01_01_09_IX_02", columnList = "F_05"),
+    @Index(name = "T_01_01_09_IX_03", columnList = "F_06"),
+    @Index(name = "T_01_01_09_IX_04", columnList = "F_09"),
+    @Index(name = "T_01_01_09_IX_05", columnList = "F_01")
+})
 public class DocumentRecord extends GenericModel {
 
     @NotNull

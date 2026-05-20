@@ -8,7 +8,13 @@ import java.time.LocalDate;
 
 @Setter @Getter @ToString @EqualsAndHashCode(callSuper = true) @NoArgsConstructor @AllArgsConstructor
 @Entity(name = "RetentionAssignment")
-@Table(name = "T_01_01_11")
+@Table(name = "T_01_01_11", indexes = {
+    @Index(name = "T_01_01_11_IX_01", columnList = "F_01"),
+    @Index(name = "T_01_01_11_IX_02", columnList = "F_07"),
+    @Index(name = "T_01_01_11_IX_03", columnList = "F_08"),
+    @Index(name = "T_01_01_11_IX_04", columnList = "F_02"),
+    @Index(name = "T_01_01_11_IX_05", columnList = "F_03")
+})
 public class RetentionAssignment extends GenericModel {
     @ManyToOne
     @JoinColumn(name = "F_01", referencedColumnName = "F_00", foreignKey = @ForeignKey(name = "T_01_01_11_FK_01"), nullable = false)
