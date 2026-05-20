@@ -12,10 +12,12 @@ import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 public interface RetentionAssignmentRepository extends JpaRepository<RetentionAssignment, Long> {
     List<RetentionAssignment> findByRetentionPolicyRetentionClass(RetentionClass retentionClass);
     List<RetentionAssignment> findByDisposalEligibilityDateLessThanEqualAndLifecycleStateIn(LocalDate date, List<RetentionLifecycleState> states);
+    Optional<RetentionAssignment> findTopByArchiveFolderIdOrderByIdDesc(Long archiveFolderId);
 
     @Query("""
         select ra.id as id,
