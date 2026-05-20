@@ -32,11 +32,9 @@ import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 /**
  * Represents a sealed, immutable archive batch of audit records that have been migrated
@@ -51,8 +49,6 @@ import lombok.ToString;
 )
 @Setter
 @Getter
-@ToString(exclude = {"retentionPolicy"})
-@EqualsAndHashCode(callSuper = true, exclude = {"retentionPolicy"})
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -60,13 +56,13 @@ import lombok.ToString;
 @Table(
     name = "T_00_03_14",
     uniqueConstraints = {
-        @UniqueConstraint(name = "UK__T_00_03_14__ARCHIVE_CODE", columnNames = {"F_01"})
+        @UniqueConstraint(name = "T_00_03_14_UK_01", columnNames = {"F_01"})
     },
     indexes = {
-        @Index(name = "IDX__T_00_03_14__CODE", columnList = "F_01"),
-        @Index(name = "IDX__T_00_03_14__ARCHIVED_AT", columnList = "F_04"),
-        @Index(name = "IDX__T_00_03_14__STATUS", columnList = "F_08"),
-        @Index(name = "IDX__T_00_03_14__RETENTION", columnList = "F_09")
+        @Index(name = "IDX_T_00_03_14_01", columnList = "F_01"),
+        @Index(name = "IDX_T_00_03_14_02", columnList = "F_04"),
+        @Index(name = "IDX_T_00_03_14_03", columnList = "F_08"),
+        @Index(name = "IDX_T_00_03_14_04", columnList = "F_09")
     }
 )
 public class AuditArchive extends GenericModel {
@@ -183,7 +179,7 @@ public class AuditArchive extends GenericModel {
     @JoinColumn(
         name = "F_09",
         referencedColumnName = "F_00",
-        foreignKey = @ForeignKey(name = "FK__T_00_03_14__RETENTION_POLICY")
+        foreignKey = @ForeignKey(name = "T_00_03_14_FK_01")
     )
     private AuditRetentionPolicy retentionPolicy;
 }

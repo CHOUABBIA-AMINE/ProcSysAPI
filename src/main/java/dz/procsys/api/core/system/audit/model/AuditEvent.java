@@ -58,11 +58,11 @@ import lombok.ToString;
 @Table(
     name = "T_00_03_11",
     indexes = {
-        @Index(name = "IDX__T_00_03_11__CORRELATION", columnList = "F_01"),
-        @Index(name = "IDX__T_00_03_11__RECEIVED", columnList = "F_02"),
-        @Index(name = "IDX__T_00_03_11__TYPE", columnList = "F_04"),
-        @Index(name = "IDX__T_00_03_11__STATUS", columnList = "F_05"),
-        @Index(name = "IDX__T_00_03_11__SOURCE", columnList = "F_06")
+        @Index(name = "IDX_T_00_03_11_01", columnList = "F_01"),
+        @Index(name = "IDX_T_00_03_11_02", columnList = "F_02"),
+        @Index(name = "IDX_T_00_03_11_03", columnList = "F_04"),
+        @Index(name = "IDX_T_00_03_11_04", columnList = "F_06"),
+        @Index(name = "IDX_T_00_03_11_05", columnList = "F_08")
     }
 )
 public class AuditEvent extends GenericModel {
@@ -105,23 +105,6 @@ public class AuditEvent extends GenericModel {
     private String rawPayload;
 
     /**
-     * Classification of the event type (FK to AuditEventType).
-     */
-    @Schema(
-        description = "Classification of the inbound event type",
-        requiredMode = Schema.RequiredMode.REQUIRED
-    )
-    @NotNull(message = "Event type is mandatory")
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(
-        name = "F_04",
-        referencedColumnName = "F_00",
-        foreignKey = @ForeignKey(name = "FK__T_00_03_11__EVENT_TYPE"),
-        nullable = false
-    )
-    private AuditEventType eventType;
-
-    /**
      * Processing status of this event: RECEIVED, PROCESSING, PROCESSED, FAILED.
      */
     @Schema(
@@ -132,7 +115,7 @@ public class AuditEvent extends GenericModel {
     )
     @NotBlank(message = "Processing status is mandatory")
     @Size(max = 50, message = "Processing status must not exceed 50 characters")
-    @Column(name = "F_05", length = 50, nullable = false)
+    @Column(name = "F_04", length = 50, nullable = false)
     private String processingStatus;
 
     /**
@@ -146,7 +129,7 @@ public class AuditEvent extends GenericModel {
     )
     @NotBlank(message = "Source module is mandatory")
     @Size(max = 100, message = "Source module must not exceed 100 characters")
-    @Column(name = "F_06", length = 100, nullable = false)
+    @Column(name = "F_05", length = 100, nullable = false)
     private String sourceModule;
 
     /**
@@ -156,7 +139,7 @@ public class AuditEvent extends GenericModel {
         description = "Error description if pipeline processing failed",
         requiredMode = Schema.RequiredMode.NOT_REQUIRED
     )
-    @Column(name = "F_07", columnDefinition = "TEXT")
+    @Column(name = "F_06", columnDefinition = "TEXT")
     private String processingError;
 
     /**
@@ -166,6 +149,23 @@ public class AuditEvent extends GenericModel {
         description = "ID of the AuditRecord promoted from this event after enrichment",
         requiredMode = Schema.RequiredMode.NOT_REQUIRED
     )
-    @Column(name = "F_08")
+    @Column(name = "F_07")
     private Long promotedAuditRecordId;
+
+    /**
+     * Classification of the event type (FK to AuditEventType).
+     */
+    @Schema(
+        description = "Classification of the inbound event type",
+        requiredMode = Schema.RequiredMode.REQUIRED
+    )
+    @NotNull(message = "Event type is mandatory")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(
+        name = "F_08",
+        referencedColumnName = "F_00",
+        foreignKey = @ForeignKey(name = "FK__T_00_03_11__EVENT_TYPE"),
+        nullable = false
+    )
+    private AuditEventType eventType;
 }

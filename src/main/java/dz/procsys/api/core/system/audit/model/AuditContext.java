@@ -23,11 +23,9 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 /**
  * Captures the technical execution context in which an auditable event occurred.
@@ -40,8 +38,6 @@ import lombok.ToString;
 )
 @Setter
 @Getter
-@ToString
-@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -49,9 +45,9 @@ import lombok.ToString;
 @Table(
     name = "T_00_03_08",
     indexes = {
-        @Index(name = "IDX__T_00_03_08__CORRELATION", columnList = "F_01"),
-        @Index(name = "IDX__T_00_03_08__REQUEST_ID", columnList = "F_02"),
-        @Index(name = "IDX__T_00_03_08__SERVICE", columnList = "F_05")
+        @Index(name = "IDX_T_00_03_08_01", columnList = "F_01"),
+        @Index(name = "IDX_T_00_03_08_02", columnList = "F_02"),
+        @Index(name = "IDX_T_00_03_08_03", columnList = "F_05")
     }
 )
 public class AuditContext extends GenericModel {

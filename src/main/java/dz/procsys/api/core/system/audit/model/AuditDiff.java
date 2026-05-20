@@ -28,11 +28,9 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 /**
  * Represents a field-level or entity-level difference recorded for an auditable state change.
@@ -46,8 +44,6 @@ import lombok.ToString;
 )
 @Setter
 @Getter
-@ToString(exclude = {"auditRecord"})
-@EqualsAndHashCode(callSuper = true, exclude = {"auditRecord"})
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -55,29 +51,12 @@ import lombok.ToString;
 @Table(
     name = "T_00_03_09",
     indexes = {
-        @Index(name = "IDX__T_00_03_09__RECORD", columnList = "F_01"),
-        @Index(name = "IDX__T_00_03_09__FIELD", columnList = "F_02"),
-        @Index(name = "IDX__T_00_03_09__MASKED", columnList = "F_07")
+        @Index(name = "IDX_T_00_03_09_01", columnList = "F_07"),
+        @Index(name = "IDX_T_00_03_09_02", columnList = "F_02"),
+        @Index(name = "IDX_T_00_03_09_03", columnList = "F_06")
     }
 )
 public class AuditDiff extends GenericModel {
-
-    /**
-     * The parent AuditRecord this diff belongs to.
-     */
-    @Schema(
-        description = "The parent audit record this diff is associated with",
-        requiredMode = Schema.RequiredMode.REQUIRED
-    )
-    @NotNull(message = "Audit record reference is mandatory")
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(
-        name = "F_01",
-        referencedColumnName = "F_00",
-        foreignKey = @ForeignKey(name = "FK__T_00_03_09__AUDIT_RECORD"),
-        nullable = false
-    )
-    private AuditRecord auditRecord;
 
     /**
      * Name of the field that changed. Null if this is an entity-level diff.
@@ -89,7 +68,7 @@ public class AuditDiff extends GenericModel {
         maxLength = 200
     )
     @Size(max = 200, message = "Field name must not exceed 200 characters")
-    @Column(name = "F_02", length = 200)
+    @Column(name = "F_01", length = 200)
     private String fieldName;
 
     /**
@@ -100,7 +79,7 @@ public class AuditDiff extends GenericModel {
         example = "30",
         requiredMode = Schema.RequiredMode.NOT_REQUIRED
     )
-    @Column(name = "F_03", columnDefinition = "TEXT")
+    @Column(name = "F_02", columnDefinition = "TEXT")
     private String beforeValue;
 
     /**
@@ -111,7 +90,7 @@ public class AuditDiff extends GenericModel {
         example = "60",
         requiredMode = Schema.RequiredMode.NOT_REQUIRED
     )
-    @Column(name = "F_04", columnDefinition = "TEXT")
+    @Column(name = "F_03", columnDefinition = "TEXT")
     private String afterValue;
 
     /**
@@ -121,7 +100,7 @@ public class AuditDiff extends GenericModel {
         description = "JSON diff representation for hybrid or entity-level diffs",
         requiredMode = Schema.RequiredMode.NOT_REQUIRED
     )
-    @Column(name = "F_05", columnDefinition = "TEXT")
+    @Column(name = "F_04", columnDefinition = "TEXT")
     private String jsonDiff;
 
     /**
@@ -135,7 +114,7 @@ public class AuditDiff extends GenericModel {
     )
     @NotBlank(message = "Diff mode is mandatory")
     @Size(max = 50, message = "Diff mode must not exceed 50 characters")
-    @Column(name = "F_06", length = 50, nullable = false)
+    @Column(name = "F_05", length = 50, nullable = false)
     private String diffMode;
 
     /**
@@ -147,6 +126,23 @@ public class AuditDiff extends GenericModel {
         requiredMode = Schema.RequiredMode.REQUIRED
     )
     @NotNull(message = "Masked flag is mandatory")
-    @Column(name = "F_07", nullable = false)
+    @Column(name = "F_06", nullable = false)
     private Boolean isMasked;
+
+    /**
+     * The parent AuditRecord this diff belongs to.
+     */
+    @Schema(
+        description = "The parent audit record this diff is associated with",
+        requiredMode = Schema.RequiredMode.REQUIRED
+    )
+    @NotNull(message = "Audit record reference is mandatory")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(
+        name = "F_07",
+        referencedColumnName = "F_00",
+        foreignKey = @ForeignKey(name = "T_00_03_09_FK_01"),
+        nullable = false
+    )
+    private AuditRecord auditRecord;
 }

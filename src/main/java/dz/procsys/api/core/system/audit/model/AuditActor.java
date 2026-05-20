@@ -24,11 +24,9 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 /**
  * Immutable snapshot of the actor who triggered a traceable audit event.
@@ -42,8 +40,6 @@ import lombok.ToString;
 )
 @Setter
 @Getter
-@ToString
-@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -54,9 +50,9 @@ import lombok.ToString;
         @UniqueConstraint(name = "UK__T_00_03_05__ACTOR_REF", columnNames = {"F_01", "F_02"})
     },
     indexes = {
-        @Index(name = "IDX__T_00_03_05__ACTOR_ID", columnList = "F_01"),
-        @Index(name = "IDX__T_00_03_05__USERNAME", columnList = "F_03"),
-        @Index(name = "IDX__T_00_03_05__SESSION", columnList = "F_06")
+        @Index(name = "IDX_T_00_03_05_01", columnList = "F_01"),
+        @Index(name = "IDX_T_00_03_05_02", columnList = "F_03"),
+        @Index(name = "IDX_T_00_03_05_03", columnList = "F_06")
     }
 )
 public class AuditActor extends GenericModel {
