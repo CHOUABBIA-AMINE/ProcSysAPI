@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Index;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.NotBlank;
@@ -27,7 +28,10 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "ProcurementArchiveBox")
-@Table(name = "T_01_01_06", uniqueConstraints = {
+@Table(name = "T_01_01_06", indexes = {
+    @Index(name = "T_01_01_06_IX_01", columnList = "F_03"),
+    @Index(name = "T_01_01_06_IX_02", columnList = "F_01")
+}, uniqueConstraints = {
     @UniqueConstraint(name = "T_01_01_06_UK_01", columnNames = { "F_01", "F_03" })
 })
 public class ArchiveBox extends GenericModel {

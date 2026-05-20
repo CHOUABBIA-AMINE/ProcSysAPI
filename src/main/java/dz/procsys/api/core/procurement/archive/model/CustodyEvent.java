@@ -8,6 +8,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Index;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -27,7 +28,14 @@ import java.time.Instant;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "CustodyEvent")
-@Table(name = "T_01_01_12")
+@Table(name = "T_01_01_12", indexes = {
+    @Index(name = "T_01_01_12_IX_01", columnList = "F_03"),
+    @Index(name = "T_01_01_12_IX_02", columnList = "F_01"),
+    @Index(name = "T_01_01_12_IX_03", columnList = "F_02"),
+    @Index(name = "T_01_01_12_IX_04", columnList = "F_07"),
+    @Index(name = "T_01_01_12_IX_05", columnList = "F_08"),
+    @Index(name = "T_01_01_12_IX_06", columnList = "F_09")
+})
 public class CustodyEvent extends GenericModel {
 
     @NotNull

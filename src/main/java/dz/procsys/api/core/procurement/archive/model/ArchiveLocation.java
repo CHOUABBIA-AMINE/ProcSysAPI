@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Index;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.NotBlank;
@@ -27,7 +28,10 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "ArchiveLocation")
-@Table(name = "T_01_01_08", uniqueConstraints = {
+@Table(name = "T_01_01_08", indexes = {
+    @Index(name = "T_01_01_08_IX_01", columnList = "F_01"),
+    @Index(name = "T_01_01_08_IX_02", columnList = "F_02")
+}, uniqueConstraints = {
     @UniqueConstraint(name = "T_01_01_08_UK_01", columnNames = { "F_01" }),
     @UniqueConstraint(name = "T_01_01_08_UK_02", columnNames = { "F_02" })
 })
